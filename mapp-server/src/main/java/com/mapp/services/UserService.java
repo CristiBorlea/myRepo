@@ -28,7 +28,7 @@ public class UserService extends AbstractService
 			while (resultSet.next())
 			{
 				int id = resultSet.getInt("id");
-				String firstName = resultSet.getString("first_name").trim();
+				String firstName = resultSet.getString("first_name");
 				String lastName = resultSet.getString("last_name").trim();
 				String emailDb = resultSet.getString("email").trim();
 
@@ -43,6 +43,7 @@ public class UserService extends AbstractService
 		{
 			StatementManager.close(stmt);
 		}
+
 		throw new DbResultNotFoundException("user for email " + email);
 	}
 
