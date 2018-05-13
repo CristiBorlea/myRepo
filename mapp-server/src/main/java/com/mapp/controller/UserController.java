@@ -1,6 +1,7 @@
 package com.mapp.controller;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,14 +39,18 @@ public class UserController
 	public ResponseEntity<String> getPassword(@RequestParam String email)
 	{
 		UserService userService = new UserService();
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.set("Access-Control-Allow-Origin","*");
+		httpHeaders.set("Access-Control-Allow-Headers", "Content-Type");
+		httpHeaders.set("Access-Control-Allow-Methods","GET,POST");
 		try
 		{
 			String password = userService.getPasswordForUser(email);
-			return new ResponseEntity(password, HttpStatus.OK);
+			return new ResponseEntity(password,httpHeaders, HttpStatus.OK);
 		}
 		catch (DbResultNotFoundException e)
 		{
-			return new ResponseEntity(HttpStatus.NOT_FOUND);
+			return new ResponseEntity(httpHeaders, HttpStatus.NOT_FOUND);
 		}
 	}
 

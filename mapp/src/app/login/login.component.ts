@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { NgModule } from '@angular/core';
 import { Router } from '@angular/router';
 import { routerTransition } from '../router.animations';
-
+import { LoginService } from '../services/login.service';
 
 @Component({
     selector: 'app-login',
@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
 	@Input() email: string;
 	@Input() password: string;
 
-    constructor(public router: Router) {}
+    constructor(public router: Router, public loginService:LoginService) {}
 
     ngOnInit() {
     }
@@ -32,6 +32,17 @@ export class LoginComponent implements OnInit {
 
 	//TODO validate user from server
     isExistingUser(){
-    	return (this.email=='admin' && this.password=='admin');
-    }
+       this.loginService.getPasswordForEmail(this.email).subscribe(
+           function(response){
+               console.log(response);
+                   //   if (dbPassword==this.password) {
+                   //     return true;
+                   //     }
+                   //     else{
+
+                   //         return false;
+                   // }
+           });
+      return false;
+    } 
 }

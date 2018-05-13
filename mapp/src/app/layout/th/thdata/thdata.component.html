@@ -1,0 +1,57 @@
+<div>
+  <div class="row">
+        <div class="col col-xl-6 col-lg-12">
+            <div class="card mb-3">
+                <div class="card-header">
+                    Temp & humidity data
+                </div>
+                <div class="card-body table-responsive">
+                    <table class="table">
+                        <thead>
+                        	<tr>
+	                       		<th>Datetime</th>
+	                       		<th>Temperature</th>
+	                       		<th>Humidity</th>
+	                       	</tr>	
+                       	</thead>
+                       	<tbody>
+                       		<tr *ngFor="let thdata of data">
+                       			<td>{{thdata.date}}</td>
+                       			<td>{{thdata.temp}}</td>
+                       			<td>{{thdata.humid}}</td>		
+                       		<tr>
+                       	</tbody>
+                   </table>
+               </div>
+           </div>
+       </div>
+   </div>	
+
+   <div class="row">
+        <div class="col col-xl-6 col-lg-12">
+            <div class="card mb-3">
+                <div class="card-header">
+                    Users
+                </div>
+                <div class="card-body table-responsive">
+                    <table class="table">
+                        <thead>
+                        	<tr>
+	                       		<th>id</th>
+	                       		<th>name</th>
+	                       		<th>email</th>
+	                       	</tr>	
+                       	</thead>
+                       	<tbody>
+                       		<tr *ngFor="let u of users">
+                       			<td>{{u.id}}</td>
+                       			<td>{{u.name}}</td>
+                       			<td>{{u.email}}</td>		
+                       		<tr>
+                       	</tbody>
+                   </table>
+               </div>
+           </div>
+       </div>
+   </div>	
+</div>
