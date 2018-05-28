@@ -1,5 +1,8 @@
 package com.mapp.controller;
+import java.util.List;
 
+import com.mapp.models.Login;
+import org.json.JSONObject;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.mapp.exceptions.DbResultNotFoundException;
 import com.mapp.models.User;
 import com.mapp.services.UserService;
+import springfox.documentation.spring.web.json.Json;
 
 
 @RestController
@@ -20,7 +24,7 @@ import com.mapp.services.UserService;
 public class UserController
 {
 
-	@RequestMapping(value = "/{email}", method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ResponseEntity<User> getUser(@RequestParam String email)
 	{
 		UserService userService = new UserService();
@@ -35,22 +39,34 @@ public class UserController
 		}
 	}
 
-	@RequestMapping(value = "/password/{email}", method = RequestMethod.GET)
-	public ResponseEntity<String> getPassword(@RequestParam String email)
+	@RequestMapping(value = "/password", method = RequestMethod.GET)
+	public ResponseEntity<Login> getPassword(@RequestParam String email)
 	{
 		UserService userService = new UserService();
-		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.set("Access-Control-Allow-Origin","*");
-		httpHeaders.set("Access-Control-Allow-Headers", "Content-Type");
-		httpHeaders.set("Access-Control-Allow-Methods","GET,POST");
 		try
 		{
 			String password = userService.getPasswordForUser(email);
-			return new ResponseEntity(password,httpHeaders, HttpStatus.OK);
+			Login login = new Login(email, password);
+			return new ResponseEntity(login, HttpStatus.OK);
 		}
 		catch (DbResultNotFoundException e)
 		{
-			return new ResponseEntity(httpHeaders, HttpStatus.NOT_FOUND);
+			return new ResponseEntity(HttpStatus.NOT_FOUND);
+		}
+	}
+
+	@RequestMapping(value = "/all", method = RequestMethod.GET)
+	public ResponseEntity<List<User>> getAllUsers()
+	{
+		UserService userService = new UserService();
+		List<User> allUsers = userService.getAllUsers();
+		if (allUsers.isEmpty())
+		{
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		else
+		{
+			return new ResponseEntity<>(allUsers, HttpStatus.OK);
 		}
 	}
 

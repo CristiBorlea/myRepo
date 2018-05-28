@@ -3,6 +3,8 @@ package com.mapp.services;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -28,11 +30,17 @@ public class UserService extends AbstractService
 			while (resultSet.next())
 			{
 				int id = resultSet.getInt("id");
-				String firstName = resultSet.getString("first_name");
+				String firstName = resultSet.getString("first_name").trim();
 				String lastName = resultSet.getString("last_name").trim();
 				String emailDb = resultSet.getString("email").trim();
+				String address = resultSet.getString("address").trim();
+				String phone = resultSet.getString("phone").trim();
+				String userName = resultSet.getString("username").trim();
+				String password = resultSet.getString("password").trim();
+				String role = resultSet.getString("role").trim();
 
-				return new User(id, firstName, lastName, emailDb);
+				System.out.println("Name: " + firstName);
+				return new User(id, firstName, lastName, emailDb,address,phone,userName,password,role);
 			}
 		}
 		catch (SQLException e)
@@ -70,6 +78,43 @@ public class UserService extends AbstractService
 		}
 		throw new DbResultNotFoundException("password for email " + email);
 	}
+
+	public List<User> getAllUsers(){
+		List<User> usersList = new ArrayList<>();
+		PreparedStatement statement = null;
+
+		try
+		{
+			statement = connection.prepareStatement("Select * from users");
+			ResultSet resultSet = statement.executeQuery();
+			while (resultSet.next()){
+				int id = resultSet.getInt("id");
+				String firstName = resultSet.getString("first_name").trim();
+				String lastName = resultSet.getString("last_name").trim();
+				String emailDb = resultSet.getString("email").trim();
+				String address = resultSet.getString("address").trim();
+				String phone = resultSet.getString("phone").trim();
+				String userName = resultSet.getString("username").trim();
+				String password = resultSet.getString("password").trim();
+				String role = resultSet.getString("role").trim();
+				User user = new User(id, firstName,lastName,emailDb,address,phone,userName,password,role);
+
+				usersList.add(user);
+				LOG.info("User phone " + phone);
+			}
+		}
+		catch (SQLException e)
+		{
+			LOG.error(e);
+		}
+		finally
+		{
+			StatementManager.close(statement);
+		}
+		return usersList;
+	}
+
+
 
 
 }
