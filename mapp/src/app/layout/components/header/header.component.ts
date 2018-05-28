@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { LoginService } from '../../../services/login.service';
 
 @Component({
     selector: 'app-header',
@@ -8,8 +9,10 @@ import { Router, NavigationEnd } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
     pushRightClass: string = 'push-right';
+    firstName: string;
+    lastName: string;
 
-    constructor( public router: Router) {
+    constructor( public router: Router, public loginService: LoginService) {
         this.router.events.subscribe(val => {
             if (
                 val instanceof NavigationEnd &&
@@ -21,7 +24,14 @@ export class HeaderComponent implements OnInit {
         });
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+        //this.loginService.loggedInUser.subscribe(result => this.firstName = result);
+        console.log("test" +this.loginService.loggedInUser.firstName);
+        // this.firstName=this.loginService.loggedInUser.firstName;
+        this.firstName='vila';
+        this.lastName=this.loginService.loggedInUser.lastName;
+        console.log("last name " +this.loginService.loggedInUser.lastName );
+    }
 
     isToggled(): boolean {
         const dom: Element = document.querySelector('body');
