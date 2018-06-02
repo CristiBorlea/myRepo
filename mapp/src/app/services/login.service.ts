@@ -8,7 +8,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 @Injectable()
 export class LoginService {
 
-  private loggedInUserSource= new BehaviorSubject<UserModel>(new UserModel());
+ /* private loggedInUserSource= new BehaviorSubject<UserModel>(new UserModel());*/
   loggedInUser: UserModel; //this.loggedInUserSource.asObservable();
 
   constructor(private httpClient:HttpClient) 

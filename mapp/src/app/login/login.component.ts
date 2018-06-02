@@ -11,35 +11,34 @@ import { UserModel } from '../models/usermodel';
     styleUrls: ['./login.component.scss'],
     animations: [routerTransition()]
 })
+
 export class LoginComponent implements OnInit {
 
-	@Input() email: string;
-	@Input() password: string;
+    @Input() email: string;
+    @Input() password: string;
 
-    constructor(public router: Router, public loginService:LoginService) {}
+    constructor(public router: Router, public loginService: LoginService) {}
 
-    ngOnInit() {
-    }
+    ngOnInit() {}
 
     doLogin() {
         this.loginService.getPasswordForEmail(this.email)
-           .subscribe(
-               (data:UserModel) => {
-                   let dbPassword = data['password'].replace(/\s/g, '');
-                   let uiPassword = this.password.replace(/\s/g, '');
+            .subscribe(
+                (data: UserModel) => {
+                    let dbPassword = data['password'].replace(/\s/g, '');
+                    let uiPassword = this.password.replace(/\s/g, '');
 
-                   if(dbPassword==uiPassword){
-                       console.log('paswords equal');
-                       this.loginService.getLoggedInUser(this.email);
-                       this.router.navigate(['/dashboard']);
-                       localStorage.setItem('isLoggedin', 'true');
-                   }
-                   else {
-                       alert('Invalid password!');
-                   }
-               },
-               (err) => {
-                   alert('This user does not exist!');
-               });
+                    if (dbPassword == uiPassword) {
+                        console.log('paswords equal');
+                        this.loginService.getLoggedInUser(this.email);
+                        this.router.navigate(['/dashboard']);
+                        localStorage.setItem('isLoggedin', 'true');
+                    } else {
+                        alert('Invalid password!');
+                    }
+                },
+                (err) => {
+                    alert('This user does not exist!');
+                });
     }
 }

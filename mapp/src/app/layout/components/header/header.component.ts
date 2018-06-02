@@ -26,11 +26,11 @@ export class HeaderComponent implements OnInit {
 
     ngOnInit() {
         //this.loginService.loggedInUser.subscribe(result => this.firstName = result);
-        console.log("test" +this.loginService.loggedInUser.firstName);
+       /* console.log("test" +this.loginService.loggedInUser.firstName);
         // this.firstName=this.loginService.loggedInUser.firstName;
         this.firstName='vila';
         this.lastName=this.loginService.loggedInUser.lastName;
-        console.log("last name " +this.loginService.loggedInUser.lastName );
+        console.log("last name " +this.loginService.loggedInUser.lastName );*/
     }
 
     isToggled(): boolean {
