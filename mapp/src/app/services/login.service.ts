@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { UserModel } from '../models/usermodel';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 
 @Injectable()
@@ -13,7 +12,7 @@ export class LoginService {
     }
 
     login(email: string): Observable < UserModel > {
-        return this.httpClient.get < UserModel > ('http://localhost:8080/user?email=' + email);
+        return this.httpClient.get<UserModel>('http://localhost:8080/user?email=' + email);
     }
 
     logout() {

@@ -35,12 +35,11 @@ public class UserService extends AbstractService
 				String emailDb = resultSet.getString("email").trim();
 				String address = resultSet.getString("address").trim();
 				String phone = resultSet.getString("phone").trim();
-				String userName = resultSet.getString("username").trim();
 				String password = resultSet.getString("password").trim();
 				String role = resultSet.getString("role").trim();
 
 				System.out.println("Name: " + firstName);
-				return new User(id, firstName, lastName, emailDb,address,phone,userName,password,role);
+				return new User(id, firstName, lastName, emailDb, address, phone, password, role);
 			}
 		}
 		catch (SQLException e)
@@ -79,7 +78,8 @@ public class UserService extends AbstractService
 		throw new DbResultNotFoundException("password for email " + email);
 	}
 
-	public List<User> getAllUsers(){
+	public List<User> getAllUsers()
+	{
 		List<User> usersList = new ArrayList<>();
 		PreparedStatement statement = null;
 
@@ -87,17 +87,17 @@ public class UserService extends AbstractService
 		{
 			statement = connection.prepareStatement("Select * from users");
 			ResultSet resultSet = statement.executeQuery();
-			while (resultSet.next()){
+			while (resultSet.next())
+			{
 				int id = resultSet.getInt("id");
 				String firstName = resultSet.getString("first_name").trim();
 				String lastName = resultSet.getString("last_name").trim();
 				String emailDb = resultSet.getString("email").trim();
 				String address = resultSet.getString("address").trim();
 				String phone = resultSet.getString("phone").trim();
-				String userName = resultSet.getString("username").trim();
 				String password = resultSet.getString("password").trim();
 				String role = resultSet.getString("role").trim();
-				User user = new User(id, firstName,lastName,emailDb,address,phone,userName,password,role);
+				User user = new User(id, firstName, lastName, emailDb, address, phone, password, role);
 
 				usersList.add(user);
 				LOG.info("User phone " + phone);
@@ -115,6 +115,31 @@ public class UserService extends AbstractService
 	}
 
 
-
-
+	public boolean create(User user)
+	{
+		PreparedStatement statement = null;
+		try
+		{
+			statement = connection.prepareStatement("Insert into users(first_name, last_name, email, address, phone, password, "
+					+ "role) VALUES(?,?,?,?,?,?,?)");
+			statement.setString(1, user.getFirstName());
+			statement.setString(2, user.getLastName());
+			statement.setString(3, user.getEmail());
+			statement.setString(4, user.getAddress());
+			statement.setString(5, user.getPhone());
+			statement.setString(6, user.getPassword());
+			statement.setString(7, "user");
+			statement.execute();
+			return true;
+		}
+		catch (SQLException e)
+		{
+			LOG.error(e);
+			return false;
+		}
+		finally
+		{
+			StatementManager.close(statement);
+		}
+	}
 }

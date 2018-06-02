@@ -3,26 +3,31 @@
         <div class="col-md-4">
             <img class="user-avatar" src="assets/images/logo.png" width="150px" />
             <h1>Monitoring App</h1>
-            <form role="form">
                 <div class="form-content">
                     <div class="form-group">
-                        <input type="text" class="form-control input-underline input-lg" id="" placeholder="Full Name">
-                    </div>
-
-                    <div class="form-group">
-                        <input type="text" class="form-control input-underline input-lg" id="" placeholder="Email">
-                    </div>
-
-                    <div class="form-group">
-                        <input type="password" class="form-control input-underline input-lg" id="" placeholder="Password">
+                        <input type="text" [(ngModel)]="firstName" class="form-control input-underline input-lg" id="firstName" placeholder="First Name">
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control input-underline input-lg" id="" placeholder="Repeat Password">
+                        <input type="text" [(ngModel)]="lastName" class="form-control input-underline input-lg" id="lastName" placeholder="Last Name">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" [(ngModel)]="email" class="form-control input-underline input-lg" id="email" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" [(ngModel)]="address" class="form-control input-underline input-lg" id="address" placeholder="Address">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" [(ngModel)]="phone" class="form-control input-underline input-lg" id="phone" placeholder="Phone">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" [(ngModel)]="password" class="form-control input-underline input-lg" id="pass" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" [(ngModel)]="passwordRepeat" class="form-control input-underline input-lg" id="passRepeat" placeholder="Repeat Password">
                     </div>
                 </div>
-                <a class="btn rounded-btn" [routerLink]="['/dashboard']"> Register </a>&nbsp;
+                <a class="btn rounded-btn" (click)="register()"> Register </a>&nbsp;
                 <a class="btn rounded-btn" [routerLink]="['/login']"> Log in </a>
-            </form>
         </div>
     </div>
 </div>
