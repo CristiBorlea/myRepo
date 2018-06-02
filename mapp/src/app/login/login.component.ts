@@ -22,17 +22,15 @@ export class LoginComponent implements OnInit {
     ngOnInit() {}
 
     doLogin() {
-        this.loginService.getPasswordForEmail(this.email)
+        this.loginService.login(this.email)
             .subscribe(
-                (data: UserModel) => {
-                    let dbPassword = data['password'].replace(/\s/g, '');
+                (user: UserModel) => {
+                    let dbPassword = user['password'].replace(/\s/g, '');
                     let uiPassword = this.password.replace(/\s/g, '');
-
                     if (dbPassword == uiPassword) {
-                        console.log('paswords equal');
-                        this.loginService.getLoggedInUser(this.email);
-                        this.router.navigate(['/dashboard']);
                         localStorage.setItem('isLoggedin', 'true');
+                        localStorage.setItem('currentUser', JSON.stringify(user));
+                        this.router.navigate(['/dashboard']);
                     } else {
                         alert('Invalid password!');
                     }

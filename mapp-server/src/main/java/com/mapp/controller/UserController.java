@@ -24,7 +24,7 @@ import springfox.documentation.spring.web.json.Json;
 public class UserController
 {
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ResponseEntity<User> getUser(@RequestParam String email)
 	{
 		UserService userService = new UserService();

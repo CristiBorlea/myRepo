@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { LoginService } from '../../../services/login.service';
+import { LoginService } from '../../../services/login.service'
+import { UserModel } from '../../../models/usermodel';
 
 @Component({
     selector: 'app-header',
@@ -11,8 +12,9 @@ export class HeaderComponent implements OnInit {
     pushRightClass: string = 'push-right';
     firstName: string;
     lastName: string;
+    currentUser: UserModel;
 
-    constructor( public router: Router, public loginService: LoginService) {
+    constructor(public router: Router, public loginService: LoginService) {
         this.router.events.subscribe(val => {
             if (
                 val instanceof NavigationEnd &&
@@ -25,12 +27,9 @@ export class HeaderComponent implements OnInit {
     }
 
     ngOnInit() {
-        //this.loginService.loggedInUser.subscribe(result => this.firstName = result);
-       /* console.log("test" +this.loginService.loggedInUser.firstName);
-        // this.firstName=this.loginService.loggedInUser.firstName;
-        this.firstName='vila';
-        this.lastName=this.loginService.loggedInUser.lastName;
-        console.log("last name " +this.loginService.loggedInUser.lastName );*/
+        this.currentUser = this.loginService.getLoggedInUser();
+        this.firstName = this.currentUser.firstName;
+        this.lastName = this.currentUser.lastName;
     }
 
     isToggled(): boolean {
@@ -44,6 +43,6 @@ export class HeaderComponent implements OnInit {
     }
 
     onLoggedout() {
-        localStorage.removeItem('isLoggedin');
+        this.loginService.logout();
     }
 }
