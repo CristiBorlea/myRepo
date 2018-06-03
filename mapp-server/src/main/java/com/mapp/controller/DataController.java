@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mapp.exceptions.DbResultNotFoundException;
 import com.mapp.models.Data;
 import com.mapp.services.DataService;
 
@@ -36,4 +37,20 @@ public class DataController
 		List<Data> allData = dataService.getDataForDevice(id);
 		return new ResponseEntity(allData, HttpStatus.OK);
 	}
+
+	@RequestMapping(value = "/last/device", method = RequestMethod.GET)
+	public ResponseEntity<Data> getLastDataForDevice(@RequestParam Integer id)
+	{
+		DataService dataService = new DataService();
+		try
+		{
+			Data data = dataService.getLastDataForDevice(id);
+			return new ResponseEntity(data, HttpStatus.OK);
+		}
+		catch (DbResultNotFoundException e)
+		{
+			return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
+		}
+	}
+
 }

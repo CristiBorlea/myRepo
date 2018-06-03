@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgbCarouselModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
-
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import {
@@ -10,6 +9,7 @@ import {
     ChatComponent
 } from './components';
 import { StatModule } from '../../shared';
+import { ThService } from '../../services/th.service';
 
 @NgModule({
     imports: [
@@ -24,6 +24,7 @@ import { StatModule } from '../../shared';
         TimelineComponent,
         NotificationComponent,
         ChatComponent
-    ]
+    ],
+    providers: [ThService]
 })
 export class DashboardModule {}

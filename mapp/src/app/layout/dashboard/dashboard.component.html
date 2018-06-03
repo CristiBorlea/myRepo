@@ -1,5 +1,5 @@
 <div [@routerTransition]>
-    <h2 class="text-muted">Dashboard <small>Statistics Overview</small></h2>
+    <h2 class="text-muted">Temperature & Humidity <small>Overview</small></h2>
     <div class="row">
         <div class="col-md-12">
             <ngb-carousel>
@@ -9,7 +9,48 @@
             </ngb-carousel>
         </div>
     </div>
-    <ngb-alert [type]="alert.type" (close)="closeAlert(alert)" *ngFor="let alert of alerts">{{ alert.message }}</ngb-alert>
+    <br>
+    <table class="dashboardTable">
+        <tr>
+            <td width="50%">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        Temperature
+                    </div>
+                    <div class="card-body">
+                         <table class="dashboardTableDateTime">
+                            <tr>
+                                <td>{{thData.date}}</td>
+                            </tr>
+                            <tr>    
+                                <td>{{thData.time}}</td>
+                            </tr>
+                        </table>
+                        <label class="labelBig">{{thData.temperature}}</label>
+                        <label class="labelSmall">°C</label>
+                    </div>
+                </div>
+            </td>
+            <td width="50%">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        Humidity
+                    </div>
+                    <div class="card-body">
+                        <table class="dashboardTableDateTime">
+                            <tr>
+                                <td>{{thData.date}}</td>
+                            </tr>
+                            <tr>    
+                                <td>{{thData.time}}</td>
+                            </tr>
+                        </table>
+                        <label class="labelBig">{{thData.humidity}}</label>
+                        <label class="labelSmall">%</label>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
     <hr />
-   
 </div>
