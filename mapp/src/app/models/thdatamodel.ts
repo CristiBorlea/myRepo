@@ -1,6 +1,6 @@
 export class ThDataModel {
-  date: string;
-  time: string;
+  dateFormatted: string;
+  timeFormatted: string;
   temperature: string;
   humidity: string;
 }

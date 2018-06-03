@@ -32,10 +32,18 @@ export class DashboardComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.getData();
+        setInterval(() => {
+            this.getData();
+        }, 5000);
+    }
+
+    private getData() {
         this.thService.getLastThData(1) //TODO selected device id instead of 1
             .subscribe(
                 (thData: ThDataModel) => {
                     this.thData = thData;
+                    console.log('get data');
                 },
                 (err) => {
                     this.thData = new ThDataModel();
