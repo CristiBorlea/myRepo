@@ -1,15 +1,11 @@
 <div [@routerTransition]>
-    <h2 class="text-muted">Temperature & Humidity <small>Overview</small></h2>
-    <div class="row">
-        <div class="col-md-12">
-            <ngb-carousel>
-                <ng-template ngbSlide *ngFor="let slider of sliders">
-                    <img class="img-fluid mx-auto d-block" [src]="slider.imagePath" alt="Random first slide" width="100%">
-                </ng-template>
-            </ngb-carousel>
-        </div>
-    </div>
-    <br>
+   <!--  <h2 class="text-muted">Temperature & Humidity <small>Overview</small></h2> -->
+   <div class="alignRight">
+        <label class="greyText">Current Date:</label><b>{{currentDate | date:'dd MMM yyyy'}}</b><br/>
+        <label class="greyText">Current Time:</label><b>{{currentDate | date:'hh:mm:ss a'}}</b>
+        <br>
+   </div>
+    
     <table class="dashboardTable">
         <tr>
             <td width="50%">
@@ -52,5 +48,17 @@
             </td>
         </tr>
     </table>
+
+<br>
+    <div class="row">
+        <div class="col-md-12">
+            <ngb-carousel>
+                <ng-template ngbSlide *ngFor="let slider of sliders">
+                    <img class="img-fluid mx-auto d-block" [src]="slider.imagePath" alt="Random first slide" width="100%">
+                </ng-template>
+            </ngb-carousel>
+        </div>
+    </div>
+
     <hr />
 </div>

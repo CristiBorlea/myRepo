@@ -13,6 +13,11 @@
 	width: 100%;
 }
 
+.greyText{
+	color:lightgrey;
+	font-weight: normal italic;
+	padding-right: 5px;
+}
 
 .labelBig {
 	font-size: 60px;
@@ -20,4 +25,9 @@
 
 .labelSmall {
 	font-size: 35px;
+}
+
+.alignRight {
+	float: right;
+	padding-right: 5px;
 }

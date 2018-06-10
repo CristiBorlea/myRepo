@@ -13,6 +13,7 @@ export class DashboardComponent implements OnInit {
 
     public sliders: Array < any > = [];
     public thData: ThDataModel;
+    private currentDate: Date;
     private deviceId: number = 1;
 
     constructor(private thService: ThService) {
@@ -32,10 +33,15 @@ export class DashboardComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.getData();
+        this.refreshData();
         setInterval(() => {
-            this.getData();
+            this.refreshData();
         }, 5000);
+    }
+
+    private refreshData() {
+        this.getData();
+        this.currentDate = new Date();
     }
 
     private getData() {
