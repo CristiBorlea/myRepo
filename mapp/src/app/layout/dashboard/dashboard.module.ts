@@ -10,6 +10,7 @@ import {
 } from './components';
 import { StatModule } from '../../shared';
 import { ThService } from '../../services/th.service';
+import { BsComponentModule } from '../bs-component/bs-component.module';
 
 @NgModule({
     imports: [
@@ -17,7 +18,8 @@ import { ThService } from '../../services/th.service';
         NgbCarouselModule.forRoot(),
         NgbAlertModule.forRoot(),
         DashboardRoutingModule,
-        StatModule
+        StatModule,
+        BsComponentModule
     ],
     declarations: [
         DashboardComponent,

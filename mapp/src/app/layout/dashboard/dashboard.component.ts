@@ -40,6 +40,7 @@ export class DashboardComponent implements OnInit {
     }
 
     private refreshData() {
+        this.thData = new ThDataModel();
         this.getData();
         this.currentDate = new Date();
     }

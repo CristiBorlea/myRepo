@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -21,6 +22,7 @@ import {
     TimepickerComponent
 } from './components';
 import { PageHeaderModule } from '../../shared';
+import { LocationDropdownComponent } from './components/location-dropdown/location-dropdown.component';
 
 @NgModule({
     imports: [
@@ -31,6 +33,7 @@ import { PageHeaderModule } from '../../shared';
         NgbModule.forRoot(),
         PageHeaderModule
     ],
+    exports: [DropdownComponent, LocationDropdownComponent],
     declarations: [
         BsComponentComponent,
         ButtonsComponent,
@@ -45,7 +48,8 @@ import { PageHeaderModule } from '../../shared';
         TabsComponent,
         RatingComponent,
         TooltipComponent,
-        TimepickerComponent
+        TimepickerComponent,
+        LocationDropdownComponent
     ]
 })
 export class BsComponentModule {}

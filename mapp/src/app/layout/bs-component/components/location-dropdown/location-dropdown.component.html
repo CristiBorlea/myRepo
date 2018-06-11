@@ -1,0 +1,9 @@
+<label class="greyText">Select location:</label>
+<div class="d-inline-block dropdown" >
+	<select [(ngModel)]="selectedLocation" (ngModelChange)='onLocationSelected($event)' 
+	class="form-control btn btn-primary dropdown-toggle">
+		<option *ngFor="let loc of locations" [ngValue]="loc.id">
+			{{loc.name}}
+		</option>
+	</select>
+</div>
