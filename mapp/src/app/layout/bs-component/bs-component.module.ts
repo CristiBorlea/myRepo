@@ -23,6 +23,7 @@ import {
 } from './components';
 import { PageHeaderModule } from '../../shared';
 import { LocationDropdownComponent } from './components/location-dropdown/location-dropdown.component';
+import { LocationService } from '../../services/location.service';
 
 @NgModule({
     imports: [
@@ -50,6 +51,7 @@ import { LocationDropdownComponent } from './components/location-dropdown/locati
         TooltipComponent,
         TimepickerComponent,
         LocationDropdownComponent
-    ]
+    ],
+     providers: [LocationService]
 })
 export class BsComponentModule {}

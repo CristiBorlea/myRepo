@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgModule } from '@angular/core';
+import { LocationService } from '../../../../services/location.service';
+import { LocationModel } from '../../../../models/locationmodel';
+
 
 @Component({
     selector: 'app-location-dropdown',
@@ -8,20 +11,18 @@ import { NgModule } from '@angular/core';
 })
 export class LocationDropdownComponent implements OnInit {
 
-    locations: any =[
-            { id: 1, name: "livingroom" },
-            { id: 2, name: "bedroom" }
-        ];
+    locations: any;
     selectedLocation: number;
 
-    constructor() {}
+    constructor(private locationService: LocationService) {}
 
     ngOnInit() {
-        this.locations = [
-            { id: 1, name: "livingroom" },
-            { id: 2, name: "bedroom" }
-        ];
-        console.log(this.locations);
+        this.locationService.getAllLocations()
+        .subscribe(
+          (allLocations: LocationModel)=>{
+              this.locations = allLocations;
+          }
+        );
     }
 
     onLocationSelected(val:any){
