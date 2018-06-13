@@ -50,7 +50,7 @@ import { LocationService } from '../../services/location.service';
         RatingComponent,
         TooltipComponent,
         TimepickerComponent,
-        LocationDropdownComponent
+        LocationDropdownComponent,
     ],
      providers: [LocationService]
 })

@@ -142,4 +142,31 @@ public class UserService extends AbstractService
 			StatementManager.close(statement);
 		}
 	}
+
+	public boolean update(User user)
+	{
+		PreparedStatement statement = null;
+		try
+		{
+			statement = connection.prepareStatement("Update users set first_name=?, last_name=?, email=?, address=?, phone=?, password=? where id =?");
+			statement.setString(1, user.getFirstName());
+			statement.setString(2, user.getLastName());
+			statement.setString(3, user.getEmail());
+			statement.setString(4, user.getAddress());
+			statement.setString(5, user.getPhone());
+			statement.setString(6, user.getPassword());
+			statement.setInt(7, user.getId());
+			statement.execute();
+			return true;
+		}
+		catch (SQLException e)
+		{
+			LOG.error(e);
+			return false;
+		}
+		finally
+		{
+			StatementManager.close(statement);
+		}
+	}
 }
