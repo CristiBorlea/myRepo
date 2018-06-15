@@ -39,7 +39,7 @@ public class UserService extends AbstractService
 				String role = resultSet.getString("role").trim();
 
 				System.out.println("Name: " + firstName);
-				return new User(id, firstName, lastName, emailDb, address, phone, password, role);
+				return new User(id, firstName, lastName, address, emailDb, phone, password, role);
 			}
 		}
 		catch (SQLException e)

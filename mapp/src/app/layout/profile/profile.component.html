@@ -21,29 +21,26 @@
                         <div class="form-content">
                             <br><br><br><br>
                             <div class="form-group">
-                                <input type="text" [(ngModel)]="firstName" class="form-control input-underline input-lg" id="firstName" placeholder="First Name">
+                                <input type="text" [(ngModel)]="user.firstName" class="form-control input-underline input-lg" id="firstName" placeholder="First Name">
                             </div>
                             <div class="form-group">
-                                <input type="text" [(ngModel)]="lastName" class="form-control input-underline input-lg" id="lastName" placeholder="Last Name">
+                                <input type="text" [(ngModel)]="user.lastName" class="form-control input-underline input-lg" id="lastName" placeholder="Last Name">
                             </div>
                             <div class="form-group">
-                                <input type="text" [(ngModel)]="email" class="form-control input-underline input-lg" id="email" placeholder="Email">
+                                <input type="text" [(ngModel)]="user.email" class="form-control input-underline input-lg" id="email" placeholder="Email">
                             </div>
                             <div class="form-group">
-                                <input type="text" [(ngModel)]="address" class="form-control input-underline input-lg" id="address" placeholder="Address">
+                                <input type="text" [(ngModel)]="user.address" class="form-control input-underline input-lg" id="address" placeholder="Address">
                             </div>
                             <div class="form-group">
-                                <input type="text" [(ngModel)]="phone" class="form-control input-underline input-lg" id="phone" placeholder="Phone">
+                                <input type="text" [(ngModel)]="user.phone" class="form-control input-underline input-lg" id="phone" placeholder="Phone">
                             </div>
                             <div class="form-group">
-                                <input type="password" [(ngModel)]="password" class="form-control input-underline input-lg" id="pass" placeholder="Password">
-                            </div>
-                            <div class="form-group">
-                                <input type="password" [(ngModel)]="passwordRepeat" class="form-control input-underline input-lg" id="passRepeat" placeholder="Repeat Password">
-                            </div>
+                                <input type="password" [(ngModel)]="user.password" class="form-control input-underline input-lg" id="pass" placeholder="Password">
+                            </div>                            
                         </div>
                         <br>
-                        <a class="btn my-btn" (click)="Update()"> Update </a>&nbsp;
+                        <a class="btn my-btn" (click)="updateProfile()"> Update </a>&nbsp;
                         <a class="btn my-btn" [routerLink]="['/dashboard']"> Cancel </a>
                     </td>
                 </tr>
