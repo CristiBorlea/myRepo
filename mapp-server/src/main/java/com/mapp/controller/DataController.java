@@ -53,4 +53,19 @@ public class DataController
 		}
 	}
 
+	@RequestMapping(value = "/last", method = RequestMethod.GET)
+	public ResponseEntity<Data> getLastDataForUserAndLocation(@RequestParam Integer userId,@RequestParam Integer locationId )
+	{
+		DataService dataService = new DataService();
+		try
+		{
+			Data data = dataService.getLastDataForUserAndLocation(userId, locationId);
+			return new ResponseEntity(data, HttpStatus.OK);
+		}
+		catch (DbResultNotFoundException e)
+		{
+			return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
+		}
+	}
+
 }

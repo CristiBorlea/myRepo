@@ -15,8 +15,8 @@ export class ThService {
 
     constructor(private httpClient: HttpClient) {}
 
-    getLastThData(deviceId: number) {
-        return this.httpClient.get<ThDataModel>('http://localhost:8080/data/last/device?id=' + deviceId);
+    getLastThData(userId: number, locationId: number) {
+        return this.httpClient.get<ThDataModel>('http://localhost:8080/data/last?userId=' + userId + '&locationId='+ locationId);
     }
 
     //TODO

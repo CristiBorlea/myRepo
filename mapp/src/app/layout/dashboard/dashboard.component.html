@@ -2,7 +2,7 @@
    <!--  <h2 class="text-muted">Temperature & Humidity <small>Overview</small></h2> -->
    <div class="alignRight">
         <label class="greyText">Current Date:</label><b>{{currentDate | date:'dd MMM yyyy'}}</b><br/>
-        <label class="greyText">Current Time:</label><b>{{currentDate | date:'hh:mm:ss a'}}</b>
+        <label class="greyText">Current Time:</label><b>{{currentDate | date:'HH:mm:ss'}}</b>
         <br>
    </div>
    <app-location-dropdown></app-location-dropdown>
@@ -12,7 +12,7 @@
                 <div class="card mb-3">
                     <div class="card-header">
                         Temperature
-                    </div>
+                    </div> 
                     <div class="card-body">
                          <table class="dashboardTableDateTime">
                             <tr>
@@ -22,8 +22,9 @@
                                 <td>{{thData.timeFormatted}}</td>
                             </tr>
                         </table>
-                        <label class="labelBig">{{thData.temperature}}</label>
-                        <label class="labelSmall">°C</label>
+                        <label class="labelBig" *ngIf="found">{{thData.temperature}}</label>
+                        <label class="labelSmall" *ngIf="found">°C</label>
+                        <label class="greyText" *ngIf="!found">No data.</label>
                     </div>
                 </div>
             </td>
@@ -41,8 +42,9 @@
                                 <td>{{thData.timeFormatted}}</td>
                             </tr>
                         </table>
-                        <label class="labelBig">{{thData.humidity}}</label>
-                        <label class="labelSmall">%</label>
+                        <label class="labelBig" *ngIf="found">{{thData.humidity}}</label>
+                        <label class="labelSmall" *ngIf="found">%</label>
+                        <label class="greyText" *ngIf="!found">No data.</label>
                     </div>
                 </div>
             </td>

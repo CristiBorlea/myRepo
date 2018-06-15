@@ -14,7 +14,9 @@ export class DashboardComponent implements OnInit {
     public sliders: Array < any > = [];
     public thData: ThDataModel;
     private currentDate: Date;
-    private deviceId: number = 1;
+    private locationId: number = 3;
+    private userId: number=1;
+    private found: boolean = false;
 
     constructor(private thService: ThService) {
         this.sliders.push({
@@ -46,14 +48,16 @@ export class DashboardComponent implements OnInit {
     }
 
     private getData() {
-        this.thService.getLastThData(1) //TODO selected device id instead of 1
+        this.thService.getLastThData(this.userId, this.locationId)
             .subscribe(
                 (thData: ThDataModel) => {
                     this.thData = thData;
-                    console.log('get data');
+                    this.found = true;
+                    console.log('get data u=' + this.userId + " l=" + this.locationId);
                 },
                 (err) => {
                     this.thData = new ThDataModel();
+                    this.found = false;
                     console.error('Cannot retrieve last th data.');
                 });
     }

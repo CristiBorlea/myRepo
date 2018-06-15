@@ -102,4 +102,28 @@ public class DataService extends AbstractService
 
 		return new Data(date, time, temperature, humidity, deviceId);
 	}
+
+	public Data getLastDataForUserAndLocation(int userId, int locationId) throws DbResultNotFoundException {
+		List<Data> dataList = new ArrayList<>();
+		PreparedStatement stmt = null;
+		try
+		{
+			stmt = connection.prepareStatement("Select TOP 1 * from devices as dv join data as dt on dt.device_id=dv.id where dv.user_id=? and dv.location_id=? Order by dt.date_time DESC");
+			stmt.setInt(1, userId);
+			stmt.setInt(2, locationId);
+			ResultSet resultSet = stmt.executeQuery();
+			while (resultSet.next()){
+				return getDataFromResultSet(resultSet);
+			}
+		}
+		catch (SQLException e)
+		{
+			LOG.error(e);
+		}
+		finally
+		{
+			StatementManager.close(stmt);
+		}
+		throw new DbResultNotFoundException("No data found for UserId="+userId + "and locationID="+ locationId);
+	}
 }
