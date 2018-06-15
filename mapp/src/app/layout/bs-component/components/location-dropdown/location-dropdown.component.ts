@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgModule } from '@angular/core';
 import { LocationService } from '../../../../services/location.service';
+import { ThService } from '../../../../services/th.service';
 import { LocationModel } from '../../../../models/locationmodel';
 
 
@@ -11,8 +12,8 @@ import { LocationModel } from '../../../../models/locationmodel';
 })
 export class LocationDropdownComponent implements OnInit {
 
-    locations: any;
-    selectedLocation: number;
+    private locations: any;
+    private selectedLocation: number;
 
     constructor(private locationService: LocationService) {}
 
@@ -23,10 +24,11 @@ export class LocationDropdownComponent implements OnInit {
               this.locations = allLocations;
           }
         );
+        this.locationService.selectedLocation.subscribe(selLoc => this.selectedLocation = selLoc);
     }
 
     onLocationSelected(val:any){
-    	console.log('on location sel: ' + val);
+    	console.log('on location select: ' + val);
+        this.locationService.changeLocation(val);
     }
-
 }

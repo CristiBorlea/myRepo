@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../../router.animations';
+import { LocationService } from '../../services/location.service';
 
 @Component({
     selector: 'app-charts',
@@ -8,6 +9,15 @@ import { routerTransition } from '../../router.animations';
     animations: [routerTransition()]
 })
 export class ChartsComponent implements OnInit {
+
+    private selectedLocation: number;
+
+    constructor(private locationService: LocationService) {}
+
+    ngOnInit() {
+        this.locationService.selectedLocation.subscribe(selLoc => this.selectedLocation = selLoc);
+    }
+
     // bar chart
     public barChartOptions: any = {
         scaleShowVerticalLines: false,
@@ -158,7 +168,4 @@ export class ChartsComponent implements OnInit {
          */
     }
 
-    constructor() {}
-
-    ngOnInit() {}
 }

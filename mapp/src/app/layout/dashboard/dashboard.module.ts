@@ -10,6 +10,7 @@ import {
 } from './components';
 import { StatModule } from '../../shared';
 import { ThService } from '../../services/th.service';
+import { LocationService } from '../../services/location.service';
 import { BsComponentModule } from '../bs-component/bs-component.module';
 
 @NgModule({
@@ -27,6 +28,6 @@ import { BsComponentModule } from '../bs-component/bs-component.module';
         NotificationComponent,
         ChatComponent
     ],
-    providers: [ThService]
+    providers: [ThService, LocationService]
 })
 export class DashboardModule {}
