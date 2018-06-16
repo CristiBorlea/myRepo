@@ -32,8 +32,7 @@ export class ThService {
                 });
     }
 
-    //TODO
-    getThdata() {
+    getAllThData(userId: number, locationId: number) {
         return [];
     }
    

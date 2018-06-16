@@ -15,82 +15,13 @@ export class ChartsComponent implements OnInit {
     constructor(private locationService: LocationService) {}
 
     ngOnInit() {
-        this.locationService.selectedLocation.subscribe(selLoc => this.selectedLocation = selLoc);
+        this.locationService.selectedLocation.subscribe(selectedLocation => this.selectedLocation = selectedLocation);
     }
-
-    // bar chart
-    public barChartOptions: any = {
-        scaleShowVerticalLines: false,
-        responsive: true
-    };
-    public barChartLabels: string[] = [
-        '2006',
-        '2007',
-        '2008',
-        '2009',
-        '2010',
-        '2011',
-        '2012'
-    ];
-    public barChartType: string = 'bar';
-    public barChartLegend: boolean = true;
-
-    public barChartData: any[] = [
-        { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-        { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
-    ];
-
-    // Doughnut
-    public doughnutChartLabels: string[] = [
-        'Download Sales',
-        'In-Store Sales',
-        'Mail-Order Sales'
-    ];
-    public doughnutChartData: number[] = [350, 450, 100];
-    public doughnutChartType: string = 'doughnut';
-
-    // Radar
-    public radarChartLabels: string[] = [
-        'Eating',
-        'Drinking',
-        'Sleeping',
-        'Designing',
-        'Coding',
-        'Cycling',
-        'Running'
-    ];
-    public radarChartData: any = [
-        { data: [65, 59, 90, 81, 56, 55, 40], label: 'Series A' },
-        { data: [28, 48, 40, 19, 96, 27, 100], label: 'Series B' }
-    ];
-    public radarChartType: string = 'radar';
-
-    // Pie
-    public pieChartLabels: string[] = [
-        'Download Sales',
-        'In-Store Sales',
-        'Mail Sales'
-    ];
-    public pieChartData: number[] = [300, 500, 100];
-    public pieChartType: string = 'pie';
-
-    // PolarArea
-    public polarAreaChartLabels: string[] = [
-        'Download Sales',
-        'In-Store Sales',
-        'Mail Sales',
-        'Telesales',
-        'Corporate Sales'
-    ];
-    public polarAreaChartData: number[] = [300, 500, 100, 40, 120];
-    public polarAreaLegend: boolean = true;
-
-    public polarAreaChartType: string = 'polarArea';
 
     // lineChart
     public lineChartData: Array<any> = [
-        { data: [10, 21, 30, 23, 24, 25, 26], label: 'Temperature' },
-        { data: [28, 48, 40, 70, 21, 27, 90], label: 'Humidity' },
+        { data: [10, 21, 30, 23, 24, 25, 26, 100], label: 'Temperature' },
+        { data: [28, 48, 40, 70, 21, 27, 90, 150], label: 'Humidity' },
        
     ];
     public lineChartLabels: Array<any> = [
@@ -103,7 +34,8 @@ export class ChartsComponent implements OnInit {
         'July'
     ];
     public lineChartOptions: any = {
-        responsive: true
+        responsive: true,
+        showXLabels: 3
     };
     public lineChartColors: Array<any> = [
         {
@@ -136,6 +68,30 @@ export class ChartsComponent implements OnInit {
     ];
     public lineChartLegend: boolean = true;
     public lineChartType: string = 'line';
+
+
+     // bar chart
+    public barChartOptions: any = {
+        scaleShowVerticalLines: false,
+        responsive: true
+    };
+    public barChartLabels: string[] = [
+        '2006',
+        '2007',
+        '2008',
+        '2009',
+        '2010',
+        '2011',
+        '2012'
+    ];
+    public barChartType: string = 'bar';
+    public barChartLegend: boolean = true;
+
+    public barChartData: any[] = [
+        { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
+        { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
+    ];
+
 
     // events
     public chartClicked(e: any): void {

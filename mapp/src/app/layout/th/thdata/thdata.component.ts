@@ -13,7 +13,7 @@ export class ThdataComponent implements OnInit {
   constructor(private thService : ThService) { }
 
   ngOnInit() {
-  	this.data = this.thService.getThdata();
+  	this.data = this.thService.getAllThData(3,1);
   }
 
 }

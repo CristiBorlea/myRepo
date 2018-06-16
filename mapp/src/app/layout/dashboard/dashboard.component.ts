@@ -45,7 +45,7 @@ export class DashboardComponent implements OnInit {
     }
 
     private refreshData() {
-        this.thData = new ThDataModel();
+        /*this.thData = new ThDataModel();*/
         this.currentDate = new Date();
 
         this.thService.lastThData.subscribe(thData => this.thData = thData);
