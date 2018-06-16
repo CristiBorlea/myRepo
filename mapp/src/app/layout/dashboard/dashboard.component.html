@@ -5,9 +5,8 @@
         <label class="greyText">Current Time:</label><b>{{currentDate | date:'HH:mm:ss'}}</b>
         <br>
    </div>
-   <app-location-dropdown></app-location-dropdown>
-   selected locId={{selectedLocation}}
-    <table class="dashboardTable">
+   <app-location-dropdown [page]="page"></app-location-dropdown>
+   <table class="dashboardTable">
         <tr>
             <td width="50%">
                 <div class="card mb-3">
@@ -23,9 +22,9 @@
                                 <td>{{thData.timeFormatted}}</td>
                             </tr>
                         </table>
-                        <label class="labelBig" *ngIf="found">{{thData.temperature}}</label>
-                        <label class="labelSmall" *ngIf="found">°C</label>
-                        <label class="greyText" *ngIf="!found">No data.</label>
+                        <label class="labelBig" *ngIf="foundData">{{thData.temperature}}</label>
+                        <label class="labelSmall" *ngIf="foundData">°C</label>
+                        <label class="greyText" *ngIf="!foundData">No data.</label>
                     </div>
                 </div>
             </td>
@@ -43,9 +42,9 @@
                                 <td>{{thData.timeFormatted}}</td>
                             </tr>
                         </table>
-                        <label class="labelBig" *ngIf="found">{{thData.humidity}}</label>
-                        <label class="labelSmall" *ngIf="found">%</label>
-                        <label class="greyText" *ngIf="!found">No data.</label>
+                        <label class="labelBig" *ngIf="foundData">{{thData.humidity}}</label>
+                        <label class="labelSmall" *ngIf="foundData">%</label>
+                        <label class="greyText" *ngIf="!foundData">No data.</label>
                     </div>
                 </div>
             </td>

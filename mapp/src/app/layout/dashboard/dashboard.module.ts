@@ -9,9 +9,11 @@ import {
     ChatComponent
 } from './components';
 import { StatModule } from '../../shared';
+import { BsComponentModule } from '../bs-component/bs-component.module';
 import { ThService } from '../../services/th.service';
 import { LocationService } from '../../services/location.service';
-import { BsComponentModule } from '../bs-component/bs-component.module';
+import { UserService } from '../../services/user.service';
+import { DashboardDataService } from '../../services/dashboard-data.service';
 
 @NgModule({
     imports: [
@@ -28,6 +30,6 @@ import { BsComponentModule } from '../bs-component/bs-component.module';
         NotificationComponent,
         ChatComponent
     ],
-    providers: [ThService, LocationService]
+    providers: [ThService, LocationService, UserService, DashboardDataService]
 })
 export class DashboardModule {}

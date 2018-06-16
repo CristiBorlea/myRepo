@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { NgModule } from '@angular/core';
+import { LocationModel } from '../../../../models/locationmodel';
 import { LocationService } from '../../../../services/location.service';
 import { ThService } from '../../../../services/th.service';
-import { LocationModel } from '../../../../models/locationmodel';
+import { DashboardDataService } from '../../../../services/dashboard-data.service';
 
 
 @Component({
@@ -12,23 +13,27 @@ import { LocationModel } from '../../../../models/locationmodel';
 })
 export class LocationDropdownComponent implements OnInit {
 
+    @Input() page: string;
+
     private locations: any;
     private selectedLocation: number;
 
-    constructor(private locationService: LocationService) {}
+
+    constructor(private locationService: LocationService, private dashboardDataService: DashboardDataService) {}
 
     ngOnInit() {
         this.locationService.getAllLocations()
-        .subscribe(
-          (allLocations: LocationModel)=>{
-              this.locations = allLocations;
-          }
-        );
+            .subscribe(
+                (allLocations: LocationModel) => {
+                    this.locations = allLocations;
+                }
+            );
         this.locationService.selectedLocation.subscribe(selLoc => this.selectedLocation = selLoc);
     }
 
-    onLocationSelected(val:any){
-    	console.log('on location select: ' + val);
-        this.locationService.changeLocation(val);
+    onLocationSelected(locationId: number) {
+        console.log('on location select: ' + locationId);
+        this.locationService.changeLocation(locationId, this.page);
     }
+
 }

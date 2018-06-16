@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../../router.animations';
 import { ThDataModel } from '../../models/thdatamodel';
 import { ThService } from '../../services/th.service';
+import { UserService } from '../../services/user.service';
 import { LocationService } from '../../services/location.service';
 
 @Component({
@@ -12,16 +13,15 @@ import { LocationService } from '../../services/location.service';
 })
 export class DashboardComponent implements OnInit {
 
+    private page: string = "dashboard";
     public sliders: Array < any > = [];
     public thData: ThDataModel;
     private currentDate: Date;
-    private locationId: number = 3;
-    private userId: number=1;
-    private found: boolean = true;
-
+    private userId: number;
     private selectedLocation: number;
+    private foundData: boolean;
 
-    constructor(private thService: ThService, private locationService: LocationService) {
+    constructor(private thService: ThService, private userService: UserService, private locationService: LocationService) {
         this.sliders.push({
             imagePath: 'assets/images/slider1.jpg',
             label: '',
@@ -38,35 +38,21 @@ export class DashboardComponent implements OnInit {
     }
 
     ngOnInit() {
-       /* this.locationService.selectedLocation.subscribe(selLoc => this.selectedLocation = selLoc);
-        console.log('dashboard sellOC2= '+this.selectedLocation);*/
         this.refreshData();
         setInterval(() => {
             this.refreshData();
-        }, 20000);
+        }, 30000);
     }
 
     private refreshData() {
-        this.locationService.selectedLocation.subscribe(selLoc => this.selectedLocation = selLoc);
         this.thData = new ThDataModel();
-        this.getData();
         this.currentDate = new Date();
-    }
 
-    private getData() {
+        this.thService.lastThData.subscribe(thData => this.thData = thData);
+        this.thService.lastThDataFound.subscribe(foundData => this.foundData = foundData);
+        this.userId = this.userService.getCurrentUserId();
+        this.locationService.selectedLocation.subscribe(selectedLocation => this.selectedLocation = selectedLocation);
+
          this.thService.getLastThData(this.userId, this.selectedLocation);
-        this.thService.lastThData.subscribe(thData => this.thData=thData);
-       /* this.thService.getLastThData(this.userId, this.selectedLocation)
-            .subscribe(
-                (thData: ThDataModel) => {
-                    this.thData = thData;
-                    this.found = true;
-                    console.log('get data u=' + this.userId + " l=" + this.locationId);
-                },
-                (err) => {
-                    this.thData = new ThDataModel();
-                    this.found = false;
-                    console.error('Cannot retrieve last th data.');
-                });*/
     }
 }

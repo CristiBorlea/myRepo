@@ -8,16 +8,12 @@ import { ThService } from '../../../services/th.service'
 })
 export class ThdataComponent implements OnInit {
 
-  data: any[];
-  users: any[];
+   data: any[];
 
   constructor(private thService : ThService) { }
 
   ngOnInit() {
   	this.data = this.thService.getThdata();
-  	this.thService.getUsers2()
-  		.subscribe(users => this.users = users);
-  	console.log(this.users);
   }
 
 }

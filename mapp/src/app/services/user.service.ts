@@ -4,13 +4,20 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { Router } from '@angular/router';
 import { UserModel } from '../models/usermodel';
-import {LoginService} from './login.service';
+import { LoginService } from './login.service';
 
 @Injectable()
 export class UserService {
 
   constructor(private httpClient: HttpClient, private router:Router, private loginService: LoginService) { }
 
+  getCurrentUser(){
+      return JSON.parse(localStorage.getItem('currentUser'));
+  }
+
+   getCurrentUserId(){
+      return this.getCurrentUser()["id"];
+  }
 
   updateProfile(userModel:UserModel){
 	this.httpClient.post<UserModel>('http://localhost:8080/user/update', userModel)
