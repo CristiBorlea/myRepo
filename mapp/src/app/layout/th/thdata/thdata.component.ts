@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ThService } from '../../../services/th.service'
+import { ThDataModel } from '../../../models/thdatamodel'
 
 @Component({
   selector: 'app-thdata',
@@ -8,12 +9,13 @@ import { ThService } from '../../../services/th.service'
 })
 export class ThdataComponent implements OnInit {
 
-   data: any[];
+   data: Array<ThDataModel>;
 
   constructor(private thService : ThService) { }
 
   ngOnInit() {
-  	this.data = this.thService.getAllThData(3,1);
+  	this.thService.getAllThData(3,1);
+  	this.thService.allThData.subscribe(data => this.data = data);
   }
 
 }

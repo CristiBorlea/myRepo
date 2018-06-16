@@ -3,6 +3,7 @@ import { routerTransition } from '../../router.animations';
 import { UserModel } from '../../models/usermodel';
 import { ThService } from '../../services/th.service';
 
+
 @Component({
     selector: 'app-tables',
     templateUrl: './tables.component.html',

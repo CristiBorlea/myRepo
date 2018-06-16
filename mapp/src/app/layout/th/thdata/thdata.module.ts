@@ -10,7 +10,8 @@ import { ThService } from '../../../services/th.service';
     CommonModule, FormsModule, ThdataRoutingModule
   ],
   declarations: [ThdataComponent],
-  providers: [ThService]
+  providers: [ThService],
+  exports: [ThdataComponent]
 })
 export class ThdataModule { }
  
