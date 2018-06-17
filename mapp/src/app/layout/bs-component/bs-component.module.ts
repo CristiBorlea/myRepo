@@ -36,7 +36,7 @@ import { ThService } from '../../services/th.service';
         NgbModule.forRoot(),
         PageHeaderModule
     ],
-    exports: [DropdownComponent, LocationDropdownComponent],
+    exports: [DropdownComponent, LocationDropdownComponent,DatePickerComponent],
     declarations: [
         BsComponentComponent,
         ButtonsComponent,

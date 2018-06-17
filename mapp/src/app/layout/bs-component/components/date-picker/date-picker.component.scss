@@ -1,5 +1,17 @@
 :host /deep/ .datepicker-input {
     .custom-select {
         width: 50%;
+        vertical-align: middle;
+        text-align: center;
     }
+}
+
+.greyText{
+	color:lightgrey;
+	font-weight: normal italic;
+	padding-right: 5px;
+	padding-left: 20px;
+	padding-top: 8px;
+	vertical-align: middle;
+	text-align-last: center;
 }

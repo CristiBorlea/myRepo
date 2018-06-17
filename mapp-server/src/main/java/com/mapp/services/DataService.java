@@ -80,4 +80,38 @@ public class DataService extends AbstractService
 		}
 		throw new DbResultNotFoundException("No data found for UserId="+userId + "and locationID="+ locationId);
 	}
+
+	public List<Data> getAllDataForInterval(Integer userId, Integer locationId, String startDate, String endDate){
+		List<Data> dataList = new ArrayList<>();
+		PreparedStatement stmt = null;
+		if (startDate== null){
+			startDate="";
+		}
+		if (endDate==null){
+			endDate="9999-12-12";
+		}
+		try
+		{
+			stmt = connection.prepareStatement("SELECT * FROM data as dt join devices as dv on dt.device_id=dv.id WHERE " +
+							"dv.user_id=? and dv.location_id=? and date_time >= ? AND date_time <= ? order by date_time desc");
+			stmt.setInt(1, userId);
+			stmt.setInt(2, locationId);
+			stmt.setString(3, startDate);
+			stmt.setString(4, endDate);
+			ResultSet resultSet = stmt.executeQuery();
+			while (resultSet.next()){
+				Data data = getDataFromResultSet(resultSet);
+				dataList.add(data);
+			}
+		}
+		catch (SQLException e)
+		{
+			LOG.error(e);
+		}
+		finally
+		{
+			StatementManager.close(stmt);
+		}
+		return dataList;
+	}
 }

@@ -1,5 +1,6 @@
 package com.mapp.controller;
 
+import java.lang.reflect.Array;
 import java.util.List;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -18,29 +19,32 @@ import com.mapp.services.DataService;
 @RestController
 @EnableAutoConfiguration
 @RequestMapping("/data")
-public class DataController
-{
+public class DataController {
 
-	@RequestMapping(value = "/all", method = RequestMethod.GET)
-	public ResponseEntity<List<Data>> getAllData(@RequestParam Integer userId, @RequestParam Integer locationId)
-	{
-		DataService dataService = new DataService();
-		List<Data> allData = dataService.getAllData(userId, locationId);
-		return new ResponseEntity(allData, HttpStatus.OK);
-	}
+    @RequestMapping(value = "/all", method = RequestMethod.GET)
+    public ResponseEntity<List<Data>> getAllData(@RequestParam Integer userId, @RequestParam Integer locationId) {
+        DataService dataService = new DataService();
+        List<Data> allData = dataService.getAllData(userId, locationId);
+        return new ResponseEntity(allData, HttpStatus.OK);
+    }
 
-	@RequestMapping(value = "/last", method = RequestMethod.GET)
-	public ResponseEntity<Data> getLastDataForUserAndLocation(@RequestParam Integer userId, @RequestParam Integer locationId)
-	{
-		DataService dataService = new DataService();
-		try
-		{
-			Data data = dataService.getLastDataForUserAndLocation(userId, locationId);
-			return new ResponseEntity(data, HttpStatus.OK);
-		}
-		catch (DbResultNotFoundException e)
-		{
-			return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
-		}
-	}
+    @RequestMapping(value = "/last", method = RequestMethod.GET)
+    public ResponseEntity<Data> getLastDataForUserAndLocation(@RequestParam Integer userId, @RequestParam Integer locationId) {
+        DataService dataService = new DataService();
+        try {
+            Data data = dataService.getLastDataForUserAndLocation(userId, locationId);
+            return new ResponseEntity(data, HttpStatus.OK);
+        } catch (DbResultNotFoundException e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @RequestMapping(value = "/interval", method = RequestMethod.GET)
+    public ResponseEntity<Data> getAllDataForInterval(@RequestParam Integer userId, @RequestParam Integer locationId,
+                                                      @RequestParam(required = false) String startDate, @RequestParam(required = false) String endDate) {
+        DataService dataService = new DataService();
+        List<Data> allData = dataService.getAllDataForInterval(userId, locationId, startDate, endDate);
+        return new ResponseEntity(allData, HttpStatus.OK);
+
+    }
 }
