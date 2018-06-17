@@ -42,7 +42,7 @@ export class ChartService {
             newHumidities.push(data.humidity);
         }
         let newChartData = [{ data: newTemperatures, label: 'Temperature' },
-        					{ data: newHumidities, label: 'humidity'}];
+        					{ data: newHumidities, label: 'Humidity'}];
         this.labelsSource.next(newlabels);
         this.lineChartDataSource.next(newChartData);
     }

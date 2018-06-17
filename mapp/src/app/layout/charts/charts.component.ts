@@ -15,24 +15,24 @@ import { ChartService } from '../../services/chart.service';
 export class ChartsComponent implements OnInit {
 
     public page="charts";
-    public lineChartLabels: Array < any >;
-    public lineChartData: Array < any >;
+    public chartLabels: Array < any >;
+    public chartData: Array < any >;
 
 
     constructor(private locationService: LocationService, private userService: UserService,
         private chartService: ChartService) {}
 
     ngOnInit() {
-        this.lineChartData = new Array();
-        this.lineChartLabels = new Array();
-        
+        this.chartData = new Array();
+        this.chartLabels = new Array();
+
         this.chartService.getChartData();
 
         this.chartService.labels.subscribe(labels => {
-            this.lineChartLabels = labels;
+            this.chartLabels = labels;
         });
-        this.chartService.lineChartData.subscribe(lineChartData => {
-            this.lineChartData = lineChartData;
+        this.chartService.lineChartData.subscribe(chartData => {
+            this.chartData = chartData;
         });
     }
 
@@ -82,33 +82,9 @@ export class ChartsComponent implements OnInit {
             display: false
         }
     };
-    public barChartLabels: string[] = [
-        '21-1-2006',
-        '27-1-2006',
-        '21-12-2006',
-        '2007',
-        '2008',
-        '2009',
-        '2010',
-        '2011',
-        '2012',
-        '2013',
-        '2015',
-        '2017',
-        '2018',
-        '2019',
-        '21-05-2021',
-        '21-09-2021',
-        '2022',
-        '2070'
-    ];
+
     public barChartType: string = 'bar';
     public barChartLegend: boolean = true;
-
-    public barChartData: any[] = [
-        { data: [65, 59, 80, 81, 56, 55, 40], label: 'Temperature' },
-        { data: [28, 48, 40, 19, 86, 27, 90], label: 'Humidity' }
-    ];
 
 
     // events
@@ -119,27 +95,4 @@ export class ChartsComponent implements OnInit {
     public chartHovered(e: any): void {
         // console.log(e);
     }
-
-    public randomize(): void {
-        // Only Change 3 values
-        const data = [
-            Math.round(Math.random() * 100),
-            59,
-            80,
-            Math.random() * 100,
-            56,
-            Math.random() * 100,
-            40
-        ];
-        const clone = JSON.parse(JSON.stringify(this.barChartData));
-        clone[0].data = data;
-        this.barChartData = clone;
-        /**
-         * (My guess), for Angular to recognize the change in the dataset
-         * it has to change the dataset variable directly,
-         * so one way around it, is to clone the data, change it and then
-         * assign it;
-         */
-    }
-
 }

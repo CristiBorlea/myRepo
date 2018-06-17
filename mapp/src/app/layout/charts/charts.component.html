@@ -9,7 +9,7 @@
                     Line Chart
                 </div>
                 <div class="card-body">
-                    <canvas baseChart height="150" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
+                    <canvas baseChart height="150" [datasets]="chartData" [labels]="chartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
                     </canvas>
                 </div>
             </div>
@@ -20,7 +20,7 @@
                     Bar Chart
                 </div>
                 <div class="card-body">
-                    <canvas baseChart height="150" [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
+                    <canvas baseChart height="150" [datasets]="chartData" [labels]="chartLabels" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
                     </canvas>
                 </div>
               <!--   <div class="card-footer">
