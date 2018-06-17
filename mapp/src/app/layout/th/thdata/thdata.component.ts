@@ -9,7 +9,8 @@ import { ThDataModel } from '../../../models/thdatamodel'
 })
 export class ThdataComponent implements OnInit {
 
-   data: Array<ThDataModel>;
+ 	private page: string = "tables";
+   	data: Array<ThDataModel>;
 
   constructor(private thService : ThService) { }
 

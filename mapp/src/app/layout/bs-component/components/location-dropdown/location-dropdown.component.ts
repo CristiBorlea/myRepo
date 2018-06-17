@@ -3,8 +3,6 @@ import { NgModule } from '@angular/core';
 import { LocationModel } from '../../../../models/locationmodel';
 import { LocationService } from '../../../../services/location.service';
 import { ThService } from '../../../../services/th.service';
-import { DashboardDataService } from '../../../../services/dashboard-data.service';
-
 
 @Component({
     selector: 'app-location-dropdown',
@@ -19,7 +17,7 @@ export class LocationDropdownComponent implements OnInit {
     private selectedLocation: number;
 
 
-    constructor(private locationService: LocationService, private dashboardDataService: DashboardDataService) {}
+    constructor(private locationService: LocationService) {}
 
     ngOnInit() {
         this.locationService.getAllLocations()

@@ -13,7 +13,6 @@ import { BsComponentModule } from '../bs-component/bs-component.module';
 import { ThService } from '../../services/th.service';
 import { LocationService } from '../../services/location.service';
 import { UserService } from '../../services/user.service';
-import { DashboardDataService } from '../../services/dashboard-data.service';
 
 @NgModule({
     imports: [
@@ -30,6 +29,6 @@ import { DashboardDataService } from '../../services/dashboard-data.service';
         NotificationComponent,
         ChatComponent
     ],
-    providers: [ThService, LocationService, UserService, DashboardDataService]
+    providers: [ThService, LocationService, UserService]
 })
 export class DashboardModule {}

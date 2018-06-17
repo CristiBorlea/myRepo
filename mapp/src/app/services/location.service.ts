@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { LocationModel } from '../models/locationmodel';
 import { ThService } from './th.service';
-import { DashboardDataService } from './dashboard-data.service';
+import { UserService } from '../services/user.service'
 
 @Injectable()
 export class LocationService {
@@ -14,17 +14,21 @@ export class LocationService {
 	selectedLocation = this.selectedLocationSource.asObservable();
 
   constructor(private httpClient: HttpClient, private router:Router, private thService:ThService,
-    private dashboardDataService: DashboardDataService) { }
+   private userService:UserService) { }
 
   getAllLocations(): Observable<LocationModel>{
   	return this.httpClient.get<LocationModel>('http://localhost:8080/location/all');
   }
 
   changeLocation(locationId: number, page:string){
-  	console.log('changelocation ' + locationId);
+  	console.log('changelocation ' + locationId + " " + page);
   	this.selectedLocationSource.next(locationId);
+    let userId= this.userService.getCurrentUserId();
     if (page == "dashboard") {
-       this.dashboardDataService.refreshDashboardData(locationId);
+       this.thService.getLastThData(userId, locationId);
+    } 
+    else if (page == "tables") {
+       this.thService.getAllThData(userId, locationId);
     }
   }
 
