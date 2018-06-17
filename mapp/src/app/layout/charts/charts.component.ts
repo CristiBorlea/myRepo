@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../../router.animations';
+import { ThDataModel } from '../../models/thdatamodel';
 import { LocationService } from '../../services/location.service';
+import { UserService } from '../../services/user.service';
+import { ChartService } from '../../services/chart.service';
+
 
 @Component({
     selector: 'app-charts',
@@ -10,35 +14,34 @@ import { LocationService } from '../../services/location.service';
 })
 export class ChartsComponent implements OnInit {
 
-    private selectedLocation: number;
+    public page="charts";
+    public lineChartLabels: Array < any >;
+    public lineChartData: Array < any >;
 
-    constructor(private locationService: LocationService) {}
+
+    constructor(private locationService: LocationService, private userService: UserService,
+        private chartService: ChartService) {}
 
     ngOnInit() {
-        this.locationService.selectedLocation.subscribe(selectedLocation => this.selectedLocation = selectedLocation);
+        this.lineChartData = new Array();
+        this.lineChartLabels = new Array();
+        
+        this.chartService.getChartData();
+
+        this.chartService.labels.subscribe(labels => {
+            this.lineChartLabels = labels;
+        });
+        this.chartService.lineChartData.subscribe(lineChartData => {
+            this.lineChartData = lineChartData;
+        });
     }
 
     // lineChart
-    public lineChartData: Array<any> = [
-        { data: [10, 21, 30, 23, 24, 25, 26, 100], label: 'Temperature' },
-        { data: [28, 48, 40, 70, 21, 27, 90, 150], label: 'Humidity' },
-       
-    ];
-    public lineChartLabels: Array<any> = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July'
-    ];
     public lineChartOptions: any = {
         responsive: true,
         showXLabels: 3
     };
-    public lineChartColors: Array<any> = [
-        {
+    public lineChartColors: Array < any > = [{
             // grey
             backgroundColor: 'rgba(148,159,177,0.2)',
             borderColor: 'rgba(148,159,177,1)',
@@ -70,26 +73,41 @@ export class ChartsComponent implements OnInit {
     public lineChartType: string = 'line';
 
 
-     // bar chart
+    // bar chart
     public barChartOptions: any = {
         scaleShowVerticalLines: false,
-        responsive: true
+        responsive: true,
+        title: {
+            text: "my bar ch",
+            display: false
+        }
     };
     public barChartLabels: string[] = [
-        '2006',
+        '21-1-2006',
+        '27-1-2006',
+        '21-12-2006',
         '2007',
         '2008',
         '2009',
         '2010',
         '2011',
-        '2012'
+        '2012',
+        '2013',
+        '2015',
+        '2017',
+        '2018',
+        '2019',
+        '21-05-2021',
+        '21-09-2021',
+        '2022',
+        '2070'
     ];
     public barChartType: string = 'bar';
     public barChartLegend: boolean = true;
 
     public barChartData: any[] = [
-        { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-        { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
+        { data: [65, 59, 80, 81, 56, 55, 40], label: 'Temperature' },
+        { data: [28, 48, 40, 19, 86, 27, 90], label: 'Humidity' }
     ];
 
 

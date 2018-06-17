@@ -7,10 +7,11 @@ import { PageHeaderModule } from '../../shared';
 import { BsComponentModule } from '../bs-component/bs-component.module';
 import { LocationService } from '../../services/location.service';
 import { UserService } from '../../services/user.service';
+import { ChartService } from '../../services/chart.service';
 
 @NgModule({
     imports: [CommonModule, Ng2Charts, ChartsRoutingModule, PageHeaderModule, BsComponentModule],
     declarations: [ChartsComponent],
-    providers: [LocationService, UserService]
+    providers: [LocationService, UserService, ChartService]
 })
 export class ChartsModule {}

@@ -15,7 +15,7 @@ export class ThService {
     private lastThDataFoundSource = new BehaviorSubject < boolean > (false);
     public lastThDataFound = this.lastThDataFoundSource.asObservable();
 
-   private allThDataSource = new BehaviorSubject < Array<ThDataModel> > (new Array<ThDataModel>());
+    private allThDataSource = new BehaviorSubject < Array<ThDataModel> > (new Array<ThDataModel>());
     public allThData = this.allThDataSource.asObservable();
 
     constructor(private httpClient: HttpClient) {}
@@ -26,7 +26,7 @@ export class ThService {
                 (thData: ThDataModel) => {
                     this.lastThDataSource.next(thData);
                     this.lastThDataFoundSource.next(true);
-                    console.log('get thdata u=' + userId + " l=" + locationId);
+                    console.log('get last thdata u=' + userId + " l=" + locationId);
                 },
                 (err) => {
                     this.lastThDataSource.next(new ThDataModel());
@@ -40,13 +40,12 @@ export class ThService {
         .subscribe(
             (thData: Array<ThDataModel>) => {
                 this.allThDataSource.next(thData);
-                console.log("all data retrieved");
+                console.log('get all thdata u=' + userId + " l=" + locationId);
                 console.dir(thData);
             },
             (err) => {
-                    this.allThDataSource.next(new Array<ThDataModel>());
-                    console.error('Cannot retrieve all th data.');
+                this.allThDataSource.next(new Array<ThDataModel>());
+                console.error('Cannot retrieve all th data.');
             });
     }
-   
 }

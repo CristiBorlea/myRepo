@@ -25,7 +25,7 @@ import { PageHeaderModule } from '../../shared';
 import { LocationDropdownComponent } from './components/location-dropdown/location-dropdown.component';
 import { LocationService } from '../../services/location.service';
 import { ThService } from '../../services/th.service';
-
+import { UserService } from '../../services/user.service';
 
 @NgModule({
     imports: [
@@ -54,6 +54,6 @@ import { ThService } from '../../services/th.service';
         TimepickerComponent,
         LocationDropdownComponent,
     ],
-     providers: [LocationService, ThService]
+     providers: [LocationService, ThService, UserService]
 })
 export class BsComponentModule {}
