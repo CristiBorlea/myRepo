@@ -16,7 +16,7 @@ const routes: Routes = [
             { path: 'forms', loadChildren: './form/form.module#FormModule' },
             { path: 'bs-element', loadChildren: './bs-element/bs-element.module#BsElementModule' },
             { path: 'grid', loadChildren: './grid/grid.module#GridModule' },
-            { path: 'alarms', loadChildren: './bs-component/bs-component.module#BsComponentModule' },
+            { path: 'alarms', loadChildren: './alarms/alarms.module#AlarmsModule' },
             { path: 'blank-page', loadChildren: './blank-page/blank-page.module#BlankPageModule' }
         ]
     }
