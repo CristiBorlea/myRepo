@@ -3,13 +3,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.smart.business</groupId>
-	<artifactId>smart-business-services</artifactId>
+	<groupId>com.mapp</groupId>
+	<artifactId>mapp-server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>smart-business-services</name>
-	<description>Smart business project</description>
+	<name>mapp-server</name>
+	<description>Mapp server project</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
