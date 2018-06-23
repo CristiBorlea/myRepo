@@ -1,14 +1,5 @@
 <div [@routerTransition]>
     <app-page-header [heading]="'Alarms'" [icon]="'fa-table'"></app-page-header>
-    <h1>On Off switch using Angular JS</h1>
-    <div>
-        <div class="well">
-            <i class="fa fa-toggle-on active" ng-if="status == true" ng-click="changeStatus();"></i>
-            <i class="fa fa-toggle-on fa-rotate-180 inactive" ng-if="status == false" ng-click="changeStatus();"></i>
-        </div>
-        <pre>{{ status }}</pre>
-    </div>
-    <!-- <md-switch ng-model="status" aria-label="Switch 1">
-        Switch 1:
-    </md-switch> -->
+    <ui-switch switchColor="white" defaultBgColor="red" [(ngModel)]="status"></ui-switch>
+    <pre>{{ status }}</pre>
 </div>
