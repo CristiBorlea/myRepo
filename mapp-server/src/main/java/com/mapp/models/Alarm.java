@@ -5,11 +5,12 @@ public class Alarm {
     private String type;
     private float minValue;
     private float maxValue;
-    private String active;
+    private boolean active;
     private int userId;
     private int locationId;
+    private String locationName;
 
-    public Alarm(int id, String type, float minValue, float maxValue, String active, int userId, int locationId) {
+    public Alarm(int id, String type, float minValue, float maxValue, boolean active, int userId, int locationId) {
         this.id = id;
         this.type = type;
         this.minValue = minValue;
@@ -17,6 +18,12 @@ public class Alarm {
         this.active = active;
         this.userId = userId;
         this.locationId = locationId;
+    }
+
+    public Alarm(int id, String type, float minValue, float maxValue, boolean active, int userId,int locationId, String
+          locationName) {
+        this(id, type, minValue, maxValue, active, userId, locationId);
+        this.locationName = locationName;
     }
 
     public int getId() {
@@ -51,11 +58,11 @@ public class Alarm {
         this.maxValue = maxValue;
     }
 
-    public String getActive() {
+    public boolean getActive() {
         return active;
     }
 
-    public void setActive(String active) {
+    public void setActive(boolean active) {
         this.active = active;
     }
 
@@ -73,5 +80,15 @@ public class Alarm {
 
     public void setLocationId(int locationId) {
         this.locationId = locationId;
+    }
+
+    public String getLocationName()
+    {
+        return locationName;
+    }
+
+    public void setLocationName(String locationName)
+    {
+        this.locationName = locationName;
     }
 }

@@ -4,6 +4,7 @@ import { UiSwitchModule } from 'ngx-toggle-switch';
 import { PageHeaderModule } from './../../shared';
 import { AlarmsComponent } from './alarms.component';
 import { AlarmsRoutingModule } from './alarms-routing.module';
+import { AlarmService } from '../../services/alarm.service';
 
 @NgModule({
   imports: [
@@ -12,6 +13,7 @@ import { AlarmsRoutingModule } from './alarms-routing.module';
     PageHeaderModule,
     AlarmsRoutingModule
   ],
-  declarations: [AlarmsComponent]
+  declarations: [AlarmsComponent],
+  providers: [AlarmService]
 })
 export class AlarmsModule { }

@@ -1,5 +1,41 @@
 <div [@routerTransition]>
     <app-page-header [heading]="'Alarms'" [icon]="'fa-table'"></app-page-header>
-    <ui-switch switchColor="white" defaultBgColor="red" [(ngModel)]="status"></ui-switch>
-    <pre>{{ status }}</pre>
+    <div class="card-body table-responsive">
+        <table class="card-body table">
+            <thead>
+                <th>Type</th>
+                <th>Location</th>
+                <th>Min value</th>
+                <th>Max value</th>
+                <th>Active</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let alarm of allAlarms;let index = index;">
+                    <td> {{alarm.type}} </td>
+                    <td> {{alarm.locationName}} </td>
+                    <td> {{alarm.minValue}} </td>
+                    <td> {{alarm.maxValue}} {{alarm.active}}</td>
+                    <td>
+                        <ui-switch switchColor="white" defaultBgColor="red" [(ngModel)]="alarm.active" (change)="onChange($event, alarm.id)">
+                        </ui-switch>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-lg btn-primary" (click)="onRemove(alarm.id)">Remove</button>
+                    </td>
+                </tr>
+                <tr>
+                	<td> <input class="form-control mr-sm-2" type="text" placeholder="alarm type"/></td>
+                	<td> <input class="form-control mr-sm-2" type="text" placeholder="location"> </td> 
+                	<td> <input class="form-control mr-sm-2" type="text" placeholder="min value"> </td> 
+                	<td> <input class="form-control mr-sm-2" type="text" placeholder="max value"> </td> 
+                	<td>  
+                		<ui-switch switchColor="white" defaultBgColor="red" [(ngModel)]="newAlarmActive"></ui-switch> 
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-lg btn-success" (click)="addAlarm()">Add alarm</button>
+                    </td> 
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

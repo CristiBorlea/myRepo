@@ -21,18 +21,20 @@ public class AlarmService extends AbstractService
         PreparedStatement statement = null;
         try
         {
-            statement = connection.prepareStatement("Select * from Alarms");
+            statement = connection.prepareStatement("Select * from Alarms a JOIN Location l on l.id=a.location_id");
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()){
                 int id = resultSet.getInt("id");
-                String type = resultSet.getString("type");
+                String type = resultSet.getString("type").trim();
                 float minValue =resultSet.getFloat("min_value");
                 float maxValue =resultSet.getFloat("max_value");
-                String active = resultSet.getString("active");
+                String active = resultSet.getString("active").trim();
                 int userId = resultSet.getInt("user_id");
                 int locationId = resultSet.getInt("location_id");
+                String locationName = resultSet.getString("name").trim();
 
-                Alarm alarm = new Alarm(id, type,minValue,maxValue,active,userId,locationId);
+                boolean isActive = Boolean.valueOf(active);
+                Alarm alarm = new Alarm(id, type,minValue,maxValue, isActive,userId,locationId,locationName);
                 alarmsList.add(alarm);
                 LOG.info("Alarm type " + type + "max value" + maxValue);
             }
