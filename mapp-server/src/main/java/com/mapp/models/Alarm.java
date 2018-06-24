@@ -1,6 +1,7 @@
 package com.mapp.models;
 
 public class Alarm {
+
     private int id;
     private String type;
     private float minValue;
@@ -9,6 +10,17 @@ public class Alarm {
     private int userId;
     private int locationId;
     private String locationName;
+
+    public Alarm(){}
+
+    public Alarm(int id){
+        this.id = id;
+    }
+
+    public Alarm(int id, boolean active){
+        this.id = id;
+        this.active = active;
+    }
 
     public Alarm(int id, String type, float minValue, float maxValue, boolean active, int userId, int locationId) {
         this.id = id;

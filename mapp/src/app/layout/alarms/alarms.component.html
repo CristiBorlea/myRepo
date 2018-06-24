@@ -14,7 +14,7 @@
                     <td> {{alarm.type}} </td>
                     <td> {{alarm.locationName}} </td>
                     <td> {{alarm.minValue}} </td>
-                    <td> {{alarm.maxValue}} {{alarm.active}}</td>
+                    <td> {{alarm.maxValue}} </td>
                     <td>
                         <ui-switch switchColor="white" defaultBgColor="red" [(ngModel)]="alarm.active" (change)="onChange($event, alarm.id)">
                         </ui-switch>
@@ -24,10 +24,10 @@
                     </td>
                 </tr>
                 <tr>
-                	<td> <input class="form-control mr-sm-2" type="text" placeholder="alarm type"/></td>
-                	<td> <input class="form-control mr-sm-2" type="text" placeholder="location"> </td> 
-                	<td> <input class="form-control mr-sm-2" type="text" placeholder="min value"> </td> 
-                	<td> <input class="form-control mr-sm-2" type="text" placeholder="max value"> </td> 
+                	<td> <input [(ngModel)]="newAlarmType" class="form-control mr-sm-2" type="text" placeholder="alarm type"/></td>
+                	<td> <input [(ngModel)]="newAlarmLocation" class="form-control mr-sm-2" type="text" placeholder="location"> </td> 
+                	<td> <input class="form-control mr-sm-2" type="number" placeholder="min value"> </td> 
+                	<td> <input class="form-control mr-sm-2" type="number" placeholder="max value"> </td> 
                 	<td>  
                 		<ui-switch switchColor="white" defaultBgColor="red" [(ngModel)]="newAlarmActive"></ui-switch> 
                     </td>

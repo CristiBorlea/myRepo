@@ -14,39 +14,45 @@ import { AlarmModel } from '../../models/alarmmodel';
 export class AlarmsComponent implements OnInit {
 
     allAlarms: any;
-    newAlarmActive: any;
+
+    newAlarmType: string;
+    newAlarmLocation: string;
+    newAlarmMinValue: number;
+    newAlarmMaxValue: number;
+    newAlarmActive: any = true;
 
 
     constructor(private alarmService: AlarmService) {}
 
     ngOnInit() {
-      this.newAlarmActive=true;
-      this.initAlarms();
+        this.initAlarms();
     }
 
     initAlarms() {
-        this.alarmService.getAllAlarms()
+        this.alarmService.getAllAlarms();
+        this.alarmService.allAlarms.subscribe(allAlarms => this.allAlarms = allAlarms);
+    }
+
+    onChange(active: any, alarmId: any) {
+        console.log("on change " + active + " " + alarmId);
+        this.alarmService.setActive(alarmId, active);
+    }
+
+    onRemove(alarmId: any) {
+        console.log("on remove " + alarmId);
+        this.alarmService.removeAlarm(alarmId)
             .subscribe(
-                (allAlarms: AlarmModel) => {
-                    this.allAlarms = allAlarms;
-                     console.log(this.allAlarms);
+                (alarm: any) => {
+                    alert('Alarm succesfully removed!');
+                    this.initAlarms();
                 },
                 (err) => {
-                    this.allAlarms = new Array();
-                    console.log('Cannot retrieve all alarms.');
+                    alert('Alarm cannot be removed!');
                 });
     }
 
-    onChange(active:any, alarmId:any){
-      console.log("on change " + active + " " + alarmId);
-    }
-
-    onRemove(alarmId:any){
-      console.log("on remove " + alarmId);
-    }
-
-    addAlarm(){
-      console.log("add alarm");
+    addAlarm() {
+        console.log("add alarm");
     }
 
 }

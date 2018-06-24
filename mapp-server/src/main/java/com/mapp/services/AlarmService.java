@@ -50,4 +50,46 @@ public class AlarmService extends AbstractService
         return alarmsList;
     }
 
+    public boolean updateActive(int id, boolean active)
+    {
+        PreparedStatement statement = null;
+        try
+        {
+            statement = connection.prepareStatement("Update alarms set active=? where id =?");
+            statement.setString(1, String.valueOf(active));
+            statement.setInt(2, id);
+            statement.execute();
+            return true;
+        }
+        catch (SQLException e)
+        {
+            LOG.error(e);
+            return false;
+        }
+        finally
+        {
+            StatementManager.close(statement);
+        }
+    }
+
+    public boolean removeAlarm(int alarmId)
+    {
+        PreparedStatement statement = null;
+        try
+        {
+            statement = connection.prepareStatement("delete from alarms where id =?");
+            statement.setInt(1, alarmId);
+            statement.execute();
+            return true;
+        }
+        catch (SQLException e)
+        {
+            LOG.error(e);
+            return false;
+        }
+        finally
+        {
+            StatementManager.close(statement);
+        }
+    }
 }
