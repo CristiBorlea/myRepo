@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mapp.models.Alarm;
+import com.mapp.models.User;
 import com.mapp.services.AlarmService;
+import com.mapp.services.UserService;
 
 
 @RestController
@@ -52,7 +54,7 @@ public class AlarmController {
     }
 
     @RequestMapping(value = "/remove", method = RequestMethod.DELETE)
-    public ResponseEntity<Object> remove(@RequestParam int alarmId)
+    public ResponseEntity<Object> removeAlarm(@RequestParam int alarmId)
     {
         AlarmService alarmService = new AlarmService();
         boolean removed = alarmService.removeAlarm(alarmId);
@@ -62,6 +64,17 @@ public class AlarmController {
         }
         else
         {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    public ResponseEntity<Object> createAlarm(@RequestBody Alarm alarm) {
+        AlarmService alarmService = new AlarmService();
+        boolean isCreated = alarmService.createAlarm(alarm);
+        if (isCreated) {
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }

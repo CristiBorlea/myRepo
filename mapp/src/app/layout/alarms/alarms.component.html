@@ -24,12 +24,21 @@
                     </td>
                 </tr>
                 <tr>
-                	<td> <input [(ngModel)]="newAlarmType" class="form-control mr-sm-2" type="text" placeholder="alarm type"/></td>
-                	<td> <input [(ngModel)]="newAlarmLocation" class="form-control mr-sm-2" type="text" placeholder="location"> </td> 
-                	<td> <input class="form-control mr-sm-2" type="number" placeholder="min value"> </td> 
-                	<td> <input class="form-control mr-sm-2" type="number" placeholder="max value"> </td> 
+                	<td> 
+                		<input [(ngModel)]="type" class="form-control mr-sm-2" type="text" placeholder="alarm type"/>
+                	</td>
+                	<td> 
+                		<input [(ngModel)]="location" class="form-control mr-sm-2" type="text" placeholder="location"> 
+                	</td> 
+                	<td> 
+                		<input [(ngModel)]="minValue" class="form-control mr-sm-2" type="number" placeholder="min value"> 
+                	</td> 
+                	<td> 
+                		<input [(ngModel)]="maxValue" class="form-control mr-sm-2" type="number" placeholder="max value"> 
+                	</td> 
                 	<td>  
-                		<ui-switch switchColor="white" defaultBgColor="red" [(ngModel)]="newAlarmActive"></ui-switch> 
+                		<ui-switch [(ngModel)]="active" switchColor="white" defaultBgColor="red"></ui-switch> 
+                		{{active}}
                     </td>
                     <td>
                         <button type="button" class="btn btn-lg btn-success" (click)="addAlarm()">Add alarm</button>

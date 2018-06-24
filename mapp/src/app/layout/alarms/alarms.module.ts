@@ -5,6 +5,8 @@ import { PageHeaderModule } from './../../shared';
 import { AlarmsComponent } from './alarms.component';
 import { AlarmsRoutingModule } from './alarms-routing.module';
 import { AlarmService } from '../../services/alarm.service';
+import { UserService } from '../../services/user.service';
+
 
 @NgModule({
   imports: [
@@ -14,6 +16,6 @@ import { AlarmService } from '../../services/alarm.service';
     AlarmsRoutingModule
   ],
   declarations: [AlarmsComponent],
-  providers: [AlarmService]
+  providers: [AlarmService, UserService]
 })
 export class AlarmsModule { }

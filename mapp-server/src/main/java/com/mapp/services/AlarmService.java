@@ -92,4 +92,31 @@ public class AlarmService extends AbstractService
             StatementManager.close(statement);
         }
     }
+
+    public boolean createAlarm(Alarm alarm)
+    {
+        PreparedStatement statement = null;
+        try
+        {
+            statement = connection.prepareStatement("Insert into alarms(type, min_value, max_value, active, user_id, location_id)"
+                  + " VALUES(?,?,?,?,?,?)");
+            statement.setString(1, alarm.getType());
+            statement.setFloat(2, alarm.getMinValue());
+            statement.setFloat(3, alarm.getMaxValue());
+            statement.setString(4, String.valueOf(alarm.getActive()));
+            statement.setInt(5, alarm.getUserId());
+            statement.setInt(6, alarm.getLocationId());
+            statement.execute();
+            return true;
+        }
+        catch (SQLException e)
+        {
+            LOG.error(e);
+            return false;
+        }
+        finally
+        {
+            StatementManager.close(statement);
+        }
+    }
 }

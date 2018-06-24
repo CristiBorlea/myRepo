@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgModule } from '@angular/core';
 import { routerTransition } from '../../router.animations';
 import { AlarmService } from '../../services/alarm.service';
+import { UserService } from '../../services/user.service';
 import { AlarmModel } from '../../models/alarmmodel';
 
 
@@ -15,16 +16,17 @@ export class AlarmsComponent implements OnInit {
 
     allAlarms: any;
 
-    newAlarmType: string;
-    newAlarmLocation: string;
-    newAlarmMinValue: number;
-    newAlarmMaxValue: number;
-    newAlarmActive: any = true;
+    type: string;
+    minValue: number;
+    maxValue: number;
+    active: boolean = true;
+    locationId: number = 1;
+    userId: number;
 
-
-    constructor(private alarmService: AlarmService) {}
+    constructor(private alarmService: AlarmService, private userService: UserService) {}
 
     ngOnInit() {
+        this.userId = this.userService.getCurrentUserId();
         this.initAlarms();
     }
 
@@ -43,7 +45,6 @@ export class AlarmsComponent implements OnInit {
         this.alarmService.removeAlarm(alarmId)
             .subscribe(
                 (alarm: any) => {
-                    alert('Alarm succesfully removed!');
                     this.initAlarms();
                 },
                 (err) => {
@@ -53,6 +54,14 @@ export class AlarmsComponent implements OnInit {
 
     addAlarm() {
         console.log("add alarm");
+        this.alarmService.createAlarm(this.type, this.minValue, this.maxValue, this.active, this.userId, this.locationId)
+            .subscribe(
+                (alarm: any) => {
+                    this.initAlarms();
+                },
+                (err) => {
+                    alert('Alarm cannot be created!');
+                });
     }
 
 }

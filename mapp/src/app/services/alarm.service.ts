@@ -17,7 +17,6 @@ export class AlarmService {
             .subscribe(
                 (allAlarms: any) => {
                     this.allAlarmsSource.next(allAlarms);
-                    console.log("All alarms retrieved: " + allAlarms);
                 },
                 (err) => {
                     this.allAlarmsSource.next(new Array < AlarmModel > ());
@@ -32,7 +31,7 @@ export class AlarmService {
             })
             .subscribe(
                 (alarm: any) => {
-                    alert('Alarm succesfully updated!');
+                    //alert('Alarm succesfully updated!');
                 },
                 (err) => {
                     alert('Alarm cannot be updated!');
@@ -41,5 +40,16 @@ export class AlarmService {
 
     removeAlarm(alarmId: number) {
         return this.httpClient.delete('http://localhost:8080/alarm/remove?alarmId=' + alarmId);
+    }
+
+    createAlarm(type:string, minValue:number, maxValue:number, active:boolean, userId:number, locationId:number) {
+       return this.httpClient.post('http://localhost:8080/alarm/create', {
+                type: type,
+                minValue: minValue,
+                maxValue: maxValue,
+                active: active,
+                userId: userId,
+                locationId: locationId
+            })
     }
 }
