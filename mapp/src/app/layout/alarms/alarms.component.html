@@ -24,25 +24,32 @@
                     </td>
                 </tr>
                 <tr>
-                	<td> 
-                		<input [(ngModel)]="type" class="form-control mr-sm-2" type="text" placeholder="alarm type"/>
-                	</td>
-                	<td> 
-                		<input [(ngModel)]="location" class="form-control mr-sm-2" type="text" placeholder="location"> 
-                	</td> 
-                	<td> 
-                		<input [(ngModel)]="minValue" class="form-control mr-sm-2" type="number" placeholder="min value"> 
-                	</td> 
-                	<td> 
-                		<input [(ngModel)]="maxValue" class="form-control mr-sm-2" type="number" placeholder="max value"> 
-                	</td> 
-                	<td>  
-                		<ui-switch [(ngModel)]="active" switchColor="white" defaultBgColor="red"></ui-switch> 
-                		{{active}}
+                    <td>
+                        <select [(ngModel)]="type" class="form-control dropdown-toggle">
+                            <option value="temperature" selected>temperature</option>
+                            <option value="humidity">humidity</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select [(ngModel)]="locationId" class="form-control dropdown-toggle">
+                            <option *ngFor="let loc of allLocations" [ngValue]="loc.id">
+                                {{loc.name}}
+                            </option>
+                        </select>
+                    </td>
+                    <td>
+                        <input [(ngModel)]="minValue" class="form-control mr-sm-2" type="number" placeholder="min value">
+                    </td>
+                    <td>
+                        <input [(ngModel)]="maxValue" class="form-control mr-sm-2" type="number" placeholder="max value">
+                    </td>
+                    <td>
+                        <ui-switch [(ngModel)]="active" switchColor="white" defaultBgColor="red"></ui-switch>
+                        {{active}}
                     </td>
                     <td>
                         <button type="button" class="btn btn-lg btn-success" (click)="addAlarm()">Add alarm</button>
-                    </td> 
+                    </td>
                 </tr>
             </tbody>
         </table>

@@ -6,6 +6,8 @@ import { AlarmsComponent } from './alarms.component';
 import { AlarmsRoutingModule } from './alarms-routing.module';
 import { AlarmService } from '../../services/alarm.service';
 import { UserService } from '../../services/user.service';
+import { LocationService } from '../../services/location.service';
+import { ThService } from '../../services/th.service';
 
 
 @NgModule({
@@ -16,6 +18,6 @@ import { UserService } from '../../services/user.service';
     AlarmsRoutingModule
   ],
   declarations: [AlarmsComponent],
-  providers: [AlarmService, UserService]
+  providers: [AlarmService, UserService, LocationService, ThService]
 })
 export class AlarmsModule { }
