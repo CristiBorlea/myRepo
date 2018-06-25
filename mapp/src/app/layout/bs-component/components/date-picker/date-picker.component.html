@@ -6,7 +6,7 @@
                     <td>
                         <div class="input-group datepicker-input">
                             <label class="greyText">Select start date:</label>
-                            <input class="form-control" placeholder="yyyy-mm-dd" name="dpStart" [(ngModel)]="modelStart" ngbDatepicker #d1="ngbDatepicker">
+                            <input class="form-control" placeholder="yyyy-mm-dd" name="dpStart" [(ngModel)]="modelStart" ngbDatepicker #d1="ngbDatepicker" (ngModelChange)='onStartDateChange($event)'>
                             <button class="input-group-addon" (click)="d1.toggle()" type="button">
                                 <span class="fa fa-calendar"></span>
                             </button>
@@ -15,7 +15,7 @@
                     <td>
                         <div class="input-group datepicker-input">
                             <label class="greyText">Select end date:</label>
-                            <input class="form-control" placeholder="yyyy-mm-dd" name="dpEnd" [(ngModel)]="modelEnd" ngbDatepicker #d2="ngbDatepicker">
+                            <input class="form-control" placeholder="yyyy-mm-dd" name="dpEnd" [(ngModel)]="modelEnd" ngbDatepicker #d2="ngbDatepicker" (ngModelChange)='onEndDateChange($event)'>
                             <button class="input-group-addon" (click)="d2.toggle()" type="button">
                                 <span class="fa fa-calendar"></span>
                             </button>

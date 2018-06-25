@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { LocationModel } from '../models/locationmodel';
 import { ThService } from './th.service';
-import { UserService } from '../services/user.service';
+import { UserService } from './user.service';
 
 @Injectable()
 export class LocationService {
@@ -27,7 +27,7 @@ export class LocationService {
     if (page == "dashboard") {
        this.thService.getLastThData(userId, locationId);
     } 
-    else if (page == "tables") {
+    else if (page == "datahistory") {
        this.thService.getAllThData(userId, locationId);
     }
     else if (page == "charts") {

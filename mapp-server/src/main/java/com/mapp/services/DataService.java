@@ -93,7 +93,7 @@ public class DataService extends AbstractService
 		try
 		{
 			stmt = connection.prepareStatement("SELECT * FROM data as dt join devices as dv on dt.device_id=dv.id WHERE " +
-							"dv.user_id=? and dv.location_id=? and date_time >= ? AND date_time <= ? order by date_time desc");
+							"dv.user_id=? and dv.location_id=? and date_time >= ? AND date_time <= ? order by date_time asc");
 			stmt.setInt(1, userId);
 			stmt.setInt(2, locationId);
 			stmt.setString(3, startDate);

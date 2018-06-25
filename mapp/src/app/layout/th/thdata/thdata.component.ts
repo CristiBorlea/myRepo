@@ -5,25 +5,26 @@ import { UserService } from '../../../services/user.service'
 import { LocationService } from '../../../services/location.service'
 
 @Component({
-  selector: 'app-thdata',
-  templateUrl: './thdata.component.html',
-  styleUrls: ['./thdata.component.scss']
+    selector: 'app-thdata',
+    templateUrl: './thdata.component.html',
+    styleUrls: ['./thdata.component.scss']
 })
 export class ThdataComponent implements OnInit {
 
- 	private page: string = "tables";
-   	data: Array<ThDataModel>;
-   	private locationId: number;
+    private page: string = "datahistory";
 
-  constructor(private thService : ThService, private userService:UserService, 
-  	private locationService: LocationService) { }
+    data: Array < ThDataModel > ;
+    private locationId: number;
 
-  ngOnInit() {
-  	this.locationService.selectedLocation
-  		.subscribe(selectedLocation => this.locationId=selectedLocation);
-  	let userId= this.userService.getCurrentUserId();
-  	this.thService.getAllThData(userId,this.locationId);
-  	this.thService.allThData.subscribe(data => this.data = data);
-  }
+    constructor(private thService: ThService, private userService: UserService,
+        private locationService: LocationService) {}
+
+    ngOnInit() {
+        this.locationService.selectedLocation
+            .subscribe(selectedLocation => this.locationId = selectedLocation);
+        let userId = this.userService.getCurrentUserId();
+        this.thService.getAllThData(userId, this.locationId);
+        this.thService.allThData.subscribe(data => this.data = data);
+    }
 
 }

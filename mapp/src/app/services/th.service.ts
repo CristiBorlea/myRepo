@@ -15,7 +15,7 @@ export class ThService {
     private lastThDataFoundSource = new BehaviorSubject < boolean > (false);
     public lastThDataFound = this.lastThDataFoundSource.asObservable();
 
-    private allThDataSource = new BehaviorSubject < Array<ThDataModel> > (new Array<ThDataModel>());
+    private allThDataSource = new BehaviorSubject < Array < ThDataModel > > (new Array < ThDataModel > ());
     public allThData = this.allThDataSource.asObservable();
 
     constructor(private httpClient: HttpClient) {}
@@ -36,16 +36,39 @@ export class ThService {
     }
 
     getAllThData(userId: number, locationId: number) {
-        return this.httpClient.get <Array<ThDataModel>> ('http://localhost:8080/data/all?userId=' + userId + '&locationId=' + locationId)
-        .subscribe(
-            (thData: Array<ThDataModel>) => {
-                this.allThDataSource.next(thData);
-                console.log('get all thdata u=' + userId + " l=" + locationId);
-                console.dir(thData);
-            },
-            (err) => {
-                this.allThDataSource.next(new Array<ThDataModel>());
-                console.error('Cannot retrieve all th data.');
-            });
+        return this.httpClient.get < Array < ThDataModel >> ('http://localhost:8080/data/all?userId=' + userId + '&locationId=' + locationId)
+            .subscribe(
+                (thData: Array < ThDataModel > ) => {
+                    this.allThDataSource.next(thData);
+                    console.log('get all thdata u=' + userId + " l=" + locationId);
+                    console.dir(thData);
+                },
+                (err) => {
+                    this.allThDataSource.next(new Array < ThDataModel > ());
+                    console.error('Cannot retrieve all th data.');
+                });
+    }
+
+    getAllThDataForInterval(userId: number, locationId: number, startDate: string, endDate: string) {
+        let startParam = "";
+        let endParam = "";
+        if (startDate) {
+            startParam = '&startDate=' + startDate;
+        }
+        if (endDate) {
+            endParam = '&endDate=' + endDate;
+        }
+        return this.httpClient.get < Array < ThDataModel >> ('http://localhost:8080/data/interval?userId=' +
+                userId + '&locationId=' + locationId + startParam + endParam)
+            .subscribe(
+                (thData: Array < ThDataModel > ) => {
+                    this.allThDataSource.next(thData);
+                    console.log('get all thdata u=' + userId + " l=" + locationId + " s=" + startDate + " e=" + endDate);
+                    console.dir(thData);
+                },
+                (err) => {
+                    this.allThDataSource.next(new Array < ThDataModel > ());
+                    console.error('Cannot retrieve all th data.');
+                });
     }
 }

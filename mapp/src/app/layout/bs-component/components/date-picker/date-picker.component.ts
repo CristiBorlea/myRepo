@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
+import { DatepickerService } from '../../../../services/datepicker.service';
+
 
 @Component({
     selector: 'app-date-picker',
@@ -6,10 +8,21 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./date-picker.component.scss']
 })
 export class DatePickerComponent implements OnInit {
-    model: any;
-    constructor() { }
 
-    ngOnInit() {
+ 	@Input() page: string;
+
+    modelStart: any;
+    modelEnd: any;
+
+    constructor(private datepickerService: DatepickerService) {}
+
+    ngOnInit() {}
+
+    onStartDateChange(event:any){
+    	this.datepickerService.changeStartDate(event, this.page);
     }
 
+    onEndDateChange(event:any){
+    	this.datepickerService.changeEndDate(event, this.page);
+    }
 }
