@@ -41,7 +41,7 @@ export class DashboardComponent implements OnInit {
         this.refreshData();
         setInterval(() => {
             this.refreshData();
-        }, 30000);
+        }, 1000);
     }
 
     private refreshData() {
