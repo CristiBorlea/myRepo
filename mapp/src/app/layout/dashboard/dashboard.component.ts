@@ -33,7 +33,7 @@ export class DashboardComponent implements OnInit {
         }, {
             imagePath: 'assets/images/slider3.jpg',
             label: '',
-            text: ''
+            text: '' 
         });
     }
 
@@ -41,7 +41,7 @@ export class DashboardComponent implements OnInit {
         this.refreshData();
         setInterval(() => {
             this.refreshData();
-        }, 1000);
+        }, 10000);
     }
 
     private refreshData() {
@@ -53,6 +53,8 @@ export class DashboardComponent implements OnInit {
         this.userId = this.userService.getCurrentUserId();
         this.locationService.selectedLocation.subscribe(selectedLocation => this.selectedLocation = selectedLocation);
 
-         this.thService.getLastThData(this.userId, this.selectedLocation);
+        if (this.userId != null && this.selectedLocation != null){
+            this.thService.getLastThData(this.userId, this.selectedLocation);
+        }
     }
 }

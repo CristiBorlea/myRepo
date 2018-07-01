@@ -16,7 +16,11 @@ export class UserService {
   }
 
   getCurrentUserId(){
-      return this.getCurrentUser()["id"];
+      let user = this.getCurrentUser();
+      if (user != null)
+        return user["id"];
+      else
+        return null;
   }
 
   updateProfile(userModel:UserModel){

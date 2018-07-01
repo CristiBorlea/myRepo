@@ -1,12 +1,7 @@
 <div class="row">
     <div class="col-lg-12">
-        <div class="card mb-3">
-            <div class="card-header">Alerts</div>
-            <div class="card-body">
-                <p *ngFor="let alert of alerts">
-                    <ngb-alert [type]="alert.type" (close)="closeAlert(alert)">{{ alert.message }}</ngb-alert>
-                </p>
-            </div>
-        </div>
+        <p *ngFor="let alert of alerts" style="margin-bottom: -1rem !important">
+            <ngb-alert [type]="alert.type" (close)="closeAlert(alert)">{{ alert.message }}</ngb-alert>
+        </p>
     </div>
 </div>

@@ -26,7 +26,9 @@ import { LocationDropdownComponent } from './components/location-dropdown/locati
 import { LocationService } from '../../services/location.service';
 import { ThService } from '../../services/th.service';
 import { UserService } from '../../services/user.service';
-import { DatepickerService } from '../../services/datepicker.service'
+import { DatepickerService } from '../../services/datepicker.service';
+import { AlertService } from '../../services/alert.service';
+import { AlarmService } from '../../services/alarm.service';
 
 
 @NgModule({
@@ -38,7 +40,7 @@ import { DatepickerService } from '../../services/datepicker.service'
         NgbModule.forRoot(),
         PageHeaderModule
     ],
-    exports: [DropdownComponent, LocationDropdownComponent,DatePickerComponent],
+    exports: [DropdownComponent, LocationDropdownComponent,DatePickerComponent, AlertComponent],
     declarations: [
         BsComponentComponent,
         ButtonsComponent,
@@ -56,6 +58,6 @@ import { DatepickerService } from '../../services/datepicker.service'
         TimepickerComponent,
         LocationDropdownComponent,
     ],
-     providers: [LocationService, ThService, UserService, DatepickerService]
+     providers: [LocationService, ThService, UserService, DatepickerService, AlertService, AlarmService]
 })
 export class BsComponentModule {}
