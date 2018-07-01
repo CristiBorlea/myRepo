@@ -13,19 +13,19 @@ export class AlertService {
     private allAlertsSource = new BehaviorSubject < Array < AlertModel >> (new Array < AlertModel > ());
     public allAlerts = this.allAlertsSource.asObservable();
 
-    constructor(private userService: UserService, private httpClient: HttpClient ) {}
+    constructor(private userService: UserService, private httpClient: HttpClient) {}
 
     getAllAlerts() {
-    	let userId = this.userService.getCurrentUserId();
-        return this.httpClient.get< AlertModel >('http://localhost:8080/alarm/alerts?userId='+userId)
-        	.subscribe(
-        		(alerts: any) => {
-        			this.allAlertsSource.next(alerts);
-        			console.dir(alerts);
-        		},
-        		(err) => {
+        let userId = this.userService.getCurrentUserId();
+        return this.httpClient.get < AlertModel > ('http://localhost:8080/alarm/alerts?userId=' + userId)
+            .subscribe(
+                (alerts: any) => {
+                    this.allAlertsSource.next(alerts);
+                    console.dir(alerts);
+                },
+                (err) => {
                     console.log('Cannot retrieve active alarms for user')
                 });
-      
+
     }
 }
