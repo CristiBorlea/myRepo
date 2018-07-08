@@ -1,18 +1,20 @@
 package com.mapp.services;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import com.mapp.db.StatementManager;
 import com.mapp.exceptions.DbResultNotFoundException;
 import com.mapp.models.Data;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 
 public class DataService extends AbstractService
@@ -49,8 +51,8 @@ public class DataService extends AbstractService
 	{
 		Date date = resultSet.getDate(	"date_time");
 		Date time = resultSet.getTime(	"date_time");
-		double temperature = resultSet.getInt("temperature_value");
-		double humidity = resultSet.getInt("humidity_value");
+		double temperature = formatDouble(resultSet.getDouble("temperature_value"));
+		double humidity = formatDouble(resultSet.getDouble("humidity_value"));
 		int deviceId = resultSet.getInt("device_id");
 
 		return new Data(date, time, temperature, humidity, deviceId);
@@ -113,5 +115,40 @@ public class DataService extends AbstractService
 			StatementManager.close(stmt);
 		}
 		return dataList;
+	}
+
+	public boolean insertData(Data data)
+	{
+		PreparedStatement statement = null;
+		try
+		{
+			double temp = formatDouble(data.getTemperature());
+			double humid = formatDouble(data.getHumidity());
+
+			statement = connection.prepareStatement("Insert into data(date_time, temperature_value, humidity_value, device_id) VALUES(?,?,?,?)");
+			statement.setTimestamp(1, new Timestamp(data.getDate().getTime()));
+			statement.setFloat(2, (float) temp);
+			statement.setFloat(3, (float) humid);
+			statement.setInt(4, data.getDeviceId());
+			statement.execute();
+			System.out.println("Data inserted.");
+			return true;
+		}
+		catch (SQLException e)
+		{
+			System.out.println("Data not inserted.");
+			LOG.error(e);
+			return false;
+		}
+		finally
+		{
+			StatementManager.close(statement);
+		}
+	}
+
+	private double formatDouble(double value) {
+		return BigDecimal.valueOf(value)
+				.setScale(2, RoundingMode.HALF_UP)
+				.doubleValue();
 	}
 }

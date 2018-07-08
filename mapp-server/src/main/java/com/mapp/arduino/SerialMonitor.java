@@ -1,28 +1,36 @@
 package com.mapp.arduino;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-
+import com.mapp.models.Data;
+import com.mapp.services.DataService;
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 import gnu.io.SerialPortEvent;
 import gnu.io.SerialPortEventListener;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.util.Date;
 import java.util.Enumeration;
 
 
 public class SerialMonitor implements SerialPortEventListener
 {
+	private static final int DEVICE_ID = 1;
 	private static final String PORT_NAMES[] = { "/dev/ttyUSB0", // Linux
-			"COM5", // Windows
+			"COM11", // Windows
 	};
 	private SerialPort serialPort;
 	private BufferedReader input;
 	private OutputStream output;
 	private static final int TIME_OUT = 2000;
 	private static final int DATA_RATE = 9600;
+
+	private DataService dataService;
+
+	public SerialMonitor(){
+	    this.dataService = new DataService();
+    }
 
 	public void initialize()
 	{
@@ -81,7 +89,6 @@ public class SerialMonitor implements SerialPortEventListener
 
 	public synchronized void serialEvent(SerialPortEvent oEvent)
 	{
-		System.out.println("event: " + oEvent.getEventType());
 		if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE)
 		{
 			try
@@ -90,7 +97,7 @@ public class SerialMonitor implements SerialPortEventListener
 				if (input.ready())
 				{
 					inputLine = input.readLine();
-					System.out.println(inputLine);
+					saveDataInDb(inputLine);
 				}
 
 			}
@@ -100,6 +107,30 @@ public class SerialMonitor implements SerialPortEventListener
 			}
 		}
 		// Ignore all the other eventTypes, but you should consider the other ones.
+	}
+
+	private void saveDataInDb(String inputLine) {
+		System.out.println(new Date() + ": " + inputLine);
+		if (inputLine.isEmpty()){
+			System.out.println("Empty line retrieved.");
+			return;
+		}
+
+		int tempIndex = inputLine.indexOf("t=");
+		int humidIndex = inputLine.indexOf("h=");
+
+		if (tempIndex >=0 && humidIndex >= 0){
+			String tempString = inputLine.substring(tempIndex+2, tempIndex+7);
+			String humidString = inputLine.substring(humidIndex+2, inputLine.length());
+			System.out.println("temp=" + tempString);
+			System.out.println("hum=" + humidString);
+
+			double temp=Double.valueOf(tempString);
+			double hum=Double.valueOf(humidString);
+
+			Data data = new Data(new Date(), new Date(), temp, hum, DEVICE_ID);
+			dataService.insertData(data);
+		}
 	}
 
 	public static void main(String[] args) throws Exception
@@ -112,13 +143,13 @@ public class SerialMonitor implements SerialPortEventListener
 			{
 				//the following line will keep this app alive for 1000    seconds,
 				//waiting for events to occur and responding to them    (printing incoming messages to conso
-				try
+				/*try
 				{
 					Thread.sleep(1000000);
 				}
 				catch (InterruptedException ie)
 				{
-				}
+				}*/
 			}
 		};
 		t.start();

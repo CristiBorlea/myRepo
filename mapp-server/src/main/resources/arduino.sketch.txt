@@ -39,7 +39,9 @@ void loop() {
   hum=dht.readHumidity();
   temp=dht.readTemperature();
 
+  Serial.println("temperature=");
   Serial.println(temp);
+  Serial.println("humidity=");
   Serial.println(hum);
 
   // Wait a few seconds between measurements. The DHT22 should not be read at a higher frequency of
